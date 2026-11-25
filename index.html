@@ -1,0 +1,1121 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Carmela Food · Plan de Madurez EAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3f6fc;--bg2:#e7eefa;--surface:#ffffff;--surface2:#edf2fb;--text:#0b1a33;--muted:#58698a;--line:#d3dcee;
+  --brand:#2563eb;--teal:#0d9488;--amber:#d97706;--red:#dc2626;--green:#16a34a;--purple:#7c3aed;
+  --shadow:0 12px 34px rgba(18,40,90,.12);--glow:rgba(37,99,235,.25);color-scheme:light;
+  --font:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--display:"Space Grotesk","Inter",system-ui,sans-serif;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#060c19;--bg2:#0a1428;--surface:#0e1a33;--surface2:#15244a;--text:#e9f0fc;--muted:#93a6cb;--line:#223457;
+  --brand:#5b94ff;--teal:#2dd4bf;--amber:#fbbf24;--red:#f87171;--green:#4ade80;--purple:#a78bfa;
+  --shadow:0 14px 40px rgba(0,0,0,.45);--glow:rgba(91,148,255,.35);color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#060c19;--bg2:#0a1428;--surface:#0e1a33;--surface2:#15244a;--text:#e9f0fc;--muted:#93a6cb;--line:#223457;
+  --brand:#5b94ff;--teal:#2dd4bf;--amber:#fbbf24;--red:#f87171;--green:#4ade80;--purple:#a78bfa;
+  --shadow:0 14px 40px rgba(0,0,0,.45);--glow:rgba(91,148,255,.35);color-scheme:dark;}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-snap-type:y proximity;scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 56px)}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.5;overflow-x:hidden;
+  background-image:radial-gradient(900px 500px at 85% -5%,var(--glow),transparent 70%),radial-gradient(700px 420px at -5% 40%,color-mix(in srgb,var(--teal) 14%,transparent),transparent 70%);
+  background-attachment:fixed}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--surface);z-index:41}
+h1,h2,h3,h4{font-family:var(--display);letter-spacing:-.02em;line-height:1.1}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.mono{font-variant-numeric:tabular-nums}
+
+/* top bar */
+.top{position:fixed;top:0;left:0;right:0;z-index:40;padding-top:env(safe-area-inset-top,0px);background:color-mix(in srgb,var(--surface) 90%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top-in{height:50px;display:flex;align-items:center;gap:12px;padding:0 clamp(12px,3vw,28px)}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:15px;color:var(--text);text-decoration:none;white-space:nowrap}
+.logo-k{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--teal));color:#fff;display:grid;place-items:center;font-weight:700}
+.sp{flex:1}
+.lg{display:inline-flex;align-items:center;justify-content:center;background:#fff;border-radius:12px;padding:5px 10px;box-shadow:0 2px 12px rgba(10,25,60,.14);border:1px solid rgba(120,140,180,.25)}
+.lg img{display:block;height:var(--lh,30px);width:auto}
+.logos{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:22px}
+.logos .sep{width:1px;height:28px;background:var(--line)}
+.logos.c{justify-content:center;margin:28px 0 6px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;background:var(--surface2);border:1px solid var(--line);font-size:12px;color:var(--muted);white-space:nowrap}
+.chip b{color:var(--text)}
+.ibtn{width:34px;height:34px;border-radius:10px;background:var(--surface2);border:1px solid var(--line);display:grid;place-items:center;font-size:15px}
+.ibtn:hover{border-color:var(--brand)}
+#bar{position:absolute;left:0;bottom:-1px;height:3px;width:0;background:linear-gradient(90deg,var(--brand),var(--teal),var(--amber))}
+.dots{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:30;display:flex;flex-direction:column;gap:9px}
+.dots a{width:9px;height:9px;border-radius:50%;background:var(--line);display:block;transition:.25s;position:relative}
+.dots a.on{background:var(--brand);transform:scale(1.5);box-shadow:0 0 0 4px var(--glow)}
+.dots a:hover::after{content:attr(data-t);position:absolute;right:18px;top:-6px;white-space:nowrap;background:var(--surface);border:1px solid var(--line);padding:3px 8px;border-radius:8px;font-size:11px;color:var(--text)}
+@media (max-width:900px){.dots{display:none}.hide-s{display:none}}
+
+/* scenes */
+.scene{min-height:100svh;padding:calc(72px + 4vh) clamp(16px,4.5vw,64px) 56px;display:flex;flex-direction:column;justify-content:center;scroll-snap-align:start;position:relative}
+.wrap{width:100%;max-width:1200px;margin:0 auto}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:10px}
+h2{font-size:clamp(28px,4.6vw,52px);margin-bottom:10px}
+.lead{font-size:clamp(15px,1.7vw,19px);color:var(--muted);max-width:760px}
+.grad{background:linear-gradient(100deg,var(--brand),var(--teal) 55%,var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+.card h3{font-size:16px;margin-bottom:4px}
+.sub{font-size:12.5px;color:var(--muted)}
+.grid{display:grid;gap:16px;margin-top:22px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,430px),1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0ms)}
+.scene.in .reveal{opacity:1;transform:none}
+
+/* clickable evidence */
+.ev{cursor:pointer}
+.kpi{position:relative;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px 18px 16px;box-shadow:var(--shadow);transition:transform .25s,border-color .25s,box-shadow .25s;display:block;width:100%}
+.kpi:hover{transform:translateY(-4px) scale(1.015);border-color:var(--brand);box-shadow:0 16px 40px var(--glow)}
+.kpi::after{content:"";position:absolute;inset:-1px;border-radius:20px;border:2px solid var(--brand);opacity:0;pointer-events:none;animation:ping 3s ease-out infinite}
+@keyframes ping{0%{opacity:.55;transform:scale(1)}70%,100%{opacity:0;transform:scale(1.04)}}
+.kpi .v{font-family:var(--display);font-size:clamp(30px,4vw,46px);font-weight:700;line-height:1}
+.kpi .l{font-size:13px;color:var(--text);margin-top:8px;font-weight:600}
+.kpi .d{font-size:12px;color:var(--muted);margin-top:2px}
+.kpi .tapme{position:absolute;right:12px;top:12px;font-size:10px;color:var(--brand);letter-spacing:.06em;text-transform:uppercase;opacity:.85}
+.up{color:var(--green)}.dn{color:var(--red)}.warn{color:var(--amber)}
+.tag{display:inline-block;font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px;border:1px solid var(--line);background:var(--surface2);color:var(--muted)}
+.tag.g{color:var(--green);border-color:color-mix(in srgb,var(--green) 45%,var(--line))}
+.tag.r{color:var(--red);border-color:color-mix(in srgb,var(--red) 45%,var(--line))}
+.tag.a{color:var(--amber);border-color:color-mix(in srgb,var(--amber) 45%,var(--line))}
+.tag.t{color:var(--teal);border-color:color-mix(in srgb,var(--teal) 45%,var(--line))}
+.btn{padding:11px 18px;border-radius:12px;font-weight:600;font-size:14px;border:1px solid var(--line);background:var(--surface);transition:.2s}
+.btn:hover{border-color:var(--brand);transform:translateY(-2px)}
+.btn.p{background:linear-gradient(135deg,var(--brand),var(--teal));color:#fff;border-color:transparent;box-shadow:0 10px 26px var(--glow)}
+.seg{display:inline-flex;background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:3px;gap:2px;flex-wrap:wrap}
+.seg button{padding:7px 13px;border-radius:9px;font-size:13px;font-weight:600;color:var(--muted)}
+.seg button.on{background:var(--surface);color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.mt{margin-top:16px}.mt2{margin-top:26px}
+.note{font-size:12.5px;color:var(--muted)}
+.callout{border-left:4px solid var(--amber);background:color-mix(in srgb,var(--amber) 10%,var(--surface));padding:12px 14px;border-radius:0 12px 12px 0;font-size:13.5px}
+.callout.g{border-color:var(--green);background:color-mix(in srgb,var(--green) 9%,var(--surface))}
+.callout.r{border-color:var(--red);background:color-mix(in srgb,var(--red) 9%,var(--surface))}
+.callout.b{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 9%,var(--surface))}
+
+/* charts */
+.chart{width:100%;overflow-x:auto}
+.chart svg{display:block;width:100%;height:auto;min-width:330px}
+svg text{font-family:var(--font)}
+.grid-l{stroke:var(--line);stroke-width:1}
+.ax{fill:var(--muted);font-size:10px}
+.val{fill:var(--text);font-size:10.5px;font-weight:600}
+.cap{fill:var(--muted);font-size:11px}
+.bar{transform-box:fill-box;transform-origin:50% 100%;transform:scaleY(0);transition:transform .8s cubic-bezier(.2,.9,.2,1),filter .2s;transition-delay:calc(var(--i,0)*70ms);cursor:pointer}
+[data-run="1"] .bar{transform:scaleY(1)}
+.hbar{transform-box:fill-box;transform-origin:0 50%;transform:scaleX(0);transition:transform .9s cubic-bezier(.2,.9,.2,1),filter .2s;transition-delay:calc(var(--i,0)*70ms);cursor:pointer}
+[data-run="1"] .hbar{transform:scaleX(1)}
+.bar:hover,.hbar:hover,.dot:hover{filter:brightness(1.18)}
+.ln{fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:var(--L,2000);stroke-dashoffset:var(--L,2000);transition:stroke-dashoffset 1.5s ease}
+[data-run="1"] .ln{stroke-dashoffset:0}
+.dot{cursor:pointer;opacity:0;transition:opacity .4s 1.2s,transform .2s;transform-box:fill-box;transform-origin:center}
+[data-run="1"] .dot{opacity:1}
+.dot:hover{transform:scale(1.5)}
+.fade{opacity:0;transition:opacity .6s .8s}[data-run="1"] .fade{opacity:1}
+.ringw .rtrack{fill:none;stroke:var(--surface2);stroke-width:9}
+.ringw .rv{fill:none;stroke-width:9;stroke-linecap:round;stroke-dasharray:0 264;transition:stroke-dasharray 1.3s cubic-bezier(.2,.9,.2,1)}
+.ringw .rg{fill:none;stroke:var(--line);stroke-width:9;stroke-linecap:round}
+.ringw[data-run="1"] .rv{stroke-dasharray:var(--da) 264}
+[tabindex]:focus-visible,button:focus-visible{outline:3px solid var(--brand);outline-offset:2px;border-radius:6px}
+
+/* hero */
+.hero{overflow:hidden;padding-top:calc(80px + 6vh)}
+.hero h1{font-size:clamp(52px,11vw,132px);letter-spacing:-.045em;margin:6px 0 14px}
+.hero-line{position:absolute;left:0;right:0;bottom:34px;overflow-x:auto;opacity:.97;pointer-events:none}
+.hero-line svg{min-width:1100px;width:100%;display:block}
+.hero .wrap{position:relative;z-index:2;margin-bottom:170px}
+.hero-kpis{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}
+.hk{padding:10px 14px;border-radius:14px;background:color-mix(in srgb,var(--surface) 85%,transparent);border:1px solid var(--line);backdrop-filter:blur(8px);text-align:left;transition:.2s}
+.hk:hover{border-color:var(--brand);transform:translateY(-3px)}
+.hk b{display:block;font-family:var(--display);font-size:24px}.hk b span{font-size:inherit;color:inherit}.hk>span{font-size:12px;color:var(--muted)}
+
+/* production line svg */
+.body{fill:var(--surface2);stroke:var(--line);stroke-width:2}
+.part{fill:var(--surface);stroke:var(--brand);stroke-width:2}
+.stk{stroke:var(--brand);stroke-width:2.4;fill:none;stroke-linecap:round}
+.metal{fill:color-mix(in srgb,var(--muted) 35%,var(--surface));stroke:var(--muted);stroke-width:1.5}
+.can{fill:var(--teal)}.canl{fill:color-mix(in srgb,var(--teal) 60%,#fff)}.pch{fill:var(--amber)}
+.belt{fill:var(--surface2);stroke:var(--line);stroke-width:2}
+.beltd{stroke:var(--muted);stroke-width:2;stroke-dasharray:10 14;animation:belt 1s linear infinite;opacity:.6}
+@keyframes belt{to{stroke-dashoffset:-24}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes chop{0%,100%{transform:translateY(0)}45%,55%{transform:translateY(30px)}}
+@keyframes pump{0%,100%{transform:translateY(0)}50%{transform:translateY(-22px)}}
+@keyframes press{0%,100%{transform:translateY(0)}50%{transform:translateY(24px)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes steam{0%{transform:translateY(0) scale(.6);opacity:0}25%{opacity:.8}100%{transform:translateY(-46px) scale(1.7);opacity:0}}
+@keyframes swing{0%,100%{transform:rotate(-40deg)}50%{transform:rotate(40deg)}}
+@keyframes slide{0%{transform:translateX(-14px);opacity:0}30%,70%{opacity:1}100%{transform:translateX(14px);opacity:0}}
+@keyframes flap{0%,100%{transform:rotate(0)}50%{transform:rotate(-38deg)}}
+@keyframes halo{0%,100%{opacity:.25}50%{opacity:.6}}
+.spin{transform-box:fill-box;transform-origin:center;animation:spin 3.2s linear infinite}
+.spin2{transform-box:fill-box;transform-origin:center;animation:spin 1.6s linear infinite reverse}
+.chop{animation:chop 1.8s ease-in-out infinite}.pump{animation:pump 1.4s ease-in-out infinite}.press{animation:press 1.6s ease-in-out infinite}
+.bob{animation:bob 1.6s ease-in-out infinite}.slide{animation:slide 2s ease-in-out infinite}
+.flap{transform-box:fill-box;transform-origin:0 100%;animation:flap 2.2s ease-in-out infinite}
+.swing{transform-box:fill-box;transform-origin:50% 100%;animation:swing 2.4s ease-in-out infinite}
+.puff{fill:color-mix(in srgb,var(--muted) 45%,#fff);animation:steam 2.4s ease-out infinite;transform-box:fill-box;transform-origin:center}
+.puff.s2{animation-delay:.8s}.puff.s3{animation-delay:1.6s}
+.halo{animation:halo 2.2s ease-in-out infinite}
+.st{cursor:pointer;transition:transform .25s}
+.st:hover .body{stroke:var(--brand)}
+.st.sel .body{stroke:var(--brand);stroke-width:3}
+.stl{fill:var(--text);font-size:12px;font-weight:600;text-anchor:middle}
+.stm{fill:var(--muted);font-size:11px;text-anchor:middle}
+.badge text{fill:#fff;font-size:12px;font-weight:700;text-anchor:middle}
+.line-wrap{overflow-x:auto;padding-bottom:6px}
+.line-wrap svg{min-width:1260px;width:100%;display:block}
+
+/* maturity */
+.dom{display:grid;grid-template-columns:78px 1fr 44px;gap:10px;align-items:center;padding:7px 8px;border-radius:12px;width:100%;text-align:left;transition:.2s}
+.dom:hover{background:var(--surface2)}
+.dom .nm{font-size:13px;font-weight:600}.dom .nm small{display:block;font-weight:400;color:var(--muted);font-size:11px}
+.dom .tr{position:relative;height:12px;border-radius:99px;background:var(--surface2);overflow:visible}
+.dom .fl{position:absolute;left:0;top:0;bottom:0;border-radius:99px;width:0;transition:width 1.2s cubic-bezier(.2,.9,.2,1)}
+.dom .mk{position:absolute;top:-4px;width:3px;height:20px;background:var(--text);border-radius:2px;opacity:.55}
+.dom .sc{font-family:var(--display);font-weight:700;font-size:16px;text-align:right}
+.lvl{position:fixed;left:50%;top:22%;transform:translate(-50%,-30px) scale(.8);opacity:0;z-index:60;background:linear-gradient(135deg,var(--brand),var(--teal));color:#fff;padding:18px 28px;border-radius:20px;text-align:center;box-shadow:0 20px 60px var(--glow);pointer-events:none;transition:.5s cubic-bezier(.2,.9,.2,1)}
+.lvl.show{opacity:1;transform:translate(-50%,0) scale(1)}
+.lvl b{display:block;font-family:var(--display);font-size:26px}
+
+/* cards técnicos */
+.tc{position:relative;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px;display:grid;grid-template-columns:84px 1fr;gap:12px;align-items:center;transition:.25s;width:100%}
+.tc:hover{transform:translateY(-4px);border-color:var(--brand);box-shadow:0 14px 34px var(--glow)}
+.tc .id{font-family:var(--display);font-weight:700;font-size:18px}
+.tc small{display:block;color:var(--muted);font-size:12px}
+.ringc{position:relative;width:84px;height:84px}
+.ringc .c{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:18px}
+
+/* cycle */
+.cyc{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;justify-content:center}
+.node{position:relative;min-width:128px;flex:1;text-align:center;padding:14px 10px;border-radius:16px;background:var(--surface);border:1px solid var(--line);margin:6px}
+.node b{display:block;font-family:var(--display);font-size:22px}
+.node.miss{border-style:dashed;border-color:var(--red);background:color-mix(in srgb,var(--red) 8%,var(--surface))}
+.node.miss b{color:var(--red)}
+.node.ok b{color:var(--teal)}
+
+/* lists */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:12px;background:var(--surface);border:1px solid var(--line);font-size:13px;font-weight:600;transition:.2s}
+.pill:hover{border-color:var(--brand);transform:translateY(-2px)}
+.tier{border-radius:18px;padding:16px;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow)}
+.tier h3{font-size:15px;display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.dotc{width:10px;height:10px;border-radius:50%;display:inline-block}
+.lever{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:12px 14px;border-radius:14px;background:var(--surface);border:1px solid var(--line);width:100%;text-align:left;transition:.2s}
+.lever.on{border-color:var(--green);background:color-mix(in srgb,var(--green) 8%,var(--surface))}
+.sw{width:42px;height:24px;border-radius:99px;background:var(--line);position:relative;transition:.25s}
+.sw::after{content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.25s;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.lever.on .sw{background:var(--green)}.lever.on .sw::after{left:21px}
+.meter{position:relative;height:18px;border-radius:99px;background:var(--surface2);margin:30px 0 34px;border:1px solid var(--line)}
+.meter .f{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:linear-gradient(90deg,var(--amber),var(--green));width:0;transition:width .9s cubic-bezier(.2,.9,.2,1)}
+.meter .m{position:absolute;top:-8px;bottom:-8px;width:2px;background:var(--muted)}
+.meter .m span{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--muted);white-space:nowrap}
+.meter .m.b span{top:auto;bottom:-20px}
+.act{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;padding:10px 12px;border-radius:12px;width:100%;text-align:left;transition:.2s}
+.act:hover{background:var(--surface2)}
+.ck{width:22px;height:22px;border-radius:7px;border:2px solid var(--line);display:grid;place-items:center;font-size:13px;color:transparent;margin-top:1px;transition:.2s}
+.act.done .ck{background:var(--green);border-color:var(--green);color:#fff}
+.act.done span{text-decoration:line-through;color:var(--muted)}
+
+/* drawer */
+.scrim{position:fixed;inset:0;background:rgba(4,9,22,.55);opacity:0;pointer-events:none;transition:.3s;z-index:50}
+.scrim.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(500px,100vw);background:var(--surface);border-left:1px solid var(--line);transform:translateX(105%);transition:transform .4s cubic-bezier(.2,.85,.2,1);z-index:55;padding:calc(env(safe-area-inset-top,0px) + 18px) 22px calc(env(safe-area-inset-bottom,0px) + 24px);overflow:auto}
+.drawer.open{transform:none;box-shadow:-20px 0 60px rgba(0,0,0,.35)}
+.drawer .x{position:absolute;right:14px;top:calc(env(safe-area-inset-top,0px) + 12px);width:34px;height:34px;border-radius:10px;background:var(--surface2);border:1px solid var(--line)}
+.drawer h3{font-size:22px;margin:6px 40px 6px 0}
+.drawer .big{font-family:var(--display);font-size:46px;font-weight:700;line-height:1;margin:10px 0 4px}
+.drawer h4{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin:18px 0 6px}
+.drawer p{font-size:14px;color:var(--text)}
+.drawer .src{font-size:12.5px;color:var(--muted)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+.tw table{width:100%;border-collapse:collapse;font-size:12.5px}
+.tw th{background:var(--surface2);text-align:left;padding:7px 9px;font-weight:600;color:var(--muted);white-space:nowrap}
+.tw td{padding:6px 9px;border-top:1px solid var(--line)}
+.mini{display:grid;gap:6px;margin-top:6px}
+.mb{display:grid;grid-template-columns:120px 1fr 34px;gap:8px;align-items:center;font-size:12.5px}
+.mb i{display:block;height:9px;border-radius:99px;background:var(--brand)}
+.tip{position:fixed;z-index:70;pointer-events:none;background:var(--text);color:var(--bg);padding:5px 9px;border-radius:8px;font-size:12px;opacity:0;transition:opacity .12s;max-width:260px}
+.tip.on{opacity:1}
+#cf{position:fixed;inset:0;pointer-events:none;z-index:65}
+.foot{font-size:12px;color:var(--muted);margin-top:26px}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="#portada"><span class="lg" style="--lh:26px;padding:3px 8px"><img data-logo="carmela" alt="Carmela Foods"></span><span class="hide-s" style="color:var(--muted);font-weight:500">Plan de Madurez EAM</span></a>
+    <span class="sp"></span>
+    <span class="chip" title="Evidencias que has abierto">🔎 <b id="xpn">0</b>/<span id="xpt">0</span><span class="hide-s"> evidencias</span></span>
+    <button class="ibtn" id="theme" aria-label="Cambiar tema claro u oscuro">🌓</button>
+    <button class="ibtn" id="help" aria-label="Ayuda">?</button>
+  </div>
+  <div id="bar"></div>
+</header>
+<nav class="dots" id="dots" aria-label="Escenas"></nav>
+
+<main>
+<!-- 1 PORTADA -->
+<section class="scene hero" id="portada" data-t="Portada">
+  <div class="wrap">
+    <div class="logos reveal"><span class="lg" style="--lh:54px"><img data-logo="carmela" alt="Carmela Foods"></span><span class="sep" aria-hidden="true"></span><span class="lg" style="--lh:30px"><img data-logo="vk" alt="VisualK"></span><span class="lg" style="--lh:38px"><img data-logo="octave" alt="Octave"></span></div>
+    <p class="eyebrow reveal">VisualK · Plan de Madurez Octave Attune EAM · Noviembre 2026</p>
+    <h1 class="reveal" style="--d:80ms">Carmela <span class="grad">Food</span></h1>
+    <p class="lead reveal" style="--d:160ms">De registrar órdenes de trabajo a gestionar activos. Lo que cambió, lo que falta y la evidencia detrás de cada número.</p>
+    <div class="hero-kpis reveal" style="--d:240ms">
+      <button class="hk ev" data-ev="k-score"><b><span data-count="2.16" data-dec="2">0</span></b><span>Puntuación de madurez (1.81 en marzo)</span></button>
+      <button class="hk ev" data-ev="k-wos"><b><span data-count="29512">0</span></b><span>WOs registrados</span></button>
+      <button class="hk ev" data-ev="k-pm"><b><span data-count="74.6" data-dec="1" data-suf="%">0</span></b><span>Horas PM en 2026</span></button>
+      <button class="hk ev" data-ev="k-hours"><b><span data-count="15462">0</span> h</b><span>Horas de labor</span></button>
+    </div>
+    <div class="row reveal" style="--d:320ms">
+      <button class="btn p" data-go="cambio">Empezar el recorrido ▶</button>
+      <span class="note">💡 Toca cualquier número, barra o equipo con borde pulsante para ver su evidencia.</span>
+    </div>
+  </div>
+  <div class="hero-line" id="heroLine" aria-hidden="true" data-run="0"></div>
+</section>
+
+<!-- 2 QUÉ CAMBIÓ -->
+<section class="scene" id="cambio" data-t="Qué cambió">
+  <div class="wrap">
+    <p class="eyebrow reveal">01 · Qué cambió desde marzo</p>
+    <h2 class="reveal">El sistema <span class="grad">se usa más y mejor</span></h2>
+    <p class="lead reveal">Más WOs, más horas y un giro histórico: ahora la mayor parte del trabajo es preventivo.</p>
+    <div class="grid g4 mt2">
+      <button class="kpi ev reveal" data-ev="k-wos" style="--d:0ms"><span class="tapme">evidencia</span><div class="v"><span data-count="29512">0</span></div><div class="l">WOs totales</div><div class="d"><span class="up">▲ +9,421 (+47%)</span> vs marzo</div></button>
+      <button class="kpi ev reveal" data-ev="k-hours" style="--d:90ms"><span class="tapme">evidencia</span><div class="v"><span data-count="15462">0</span> h</div><div class="l">Horas de labor</div><div class="d"><span class="up">▲ +4,516 h (+41%)</span> vs marzo</div></button>
+      <button class="kpi ev reveal" data-ev="k-inv" style="--d:180ms"><span class="tapme">evidencia</span><div class="v"><span data-count="18845">0</span></div><div class="l">Transacciones de inventario</div><div class="d"><span class="up">▲ +3,275 (+21%)</span> vs marzo</div></button>
+      <button class="kpi ev reveal" data-ev="k-pm" style="--d:270ms"><span class="tapme">evidencia</span><div class="v"><span data-count="74.6" data-dec="1" data-suf="%">0</span></div><div class="l">Horas PM en 2026</div><div class="d"><span class="up">▲</span> vs 45.6% en 2025 · meta 80%</div></button>
+    </div>
+    <div class="grid g2">
+      <div class="card reveal" style="--d:120ms"><h3>WOs creados por año</h3><p class="sub">Toca una barra · 2026 va de enero a noviembre</p><div class="chart" id="chWO" data-run="0"></div></div>
+      <div class="card reveal" style="--d:220ms"><h3>Horas PM vs CM por año</h3><p class="sub">Toca una barra · el correctivo dejó de dominar</p><div class="chart" id="chPMCM" data-run="0"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 MADUREZ -->
+<section class="scene" id="madurez" data-t="Madurez">
+  <div class="wrap">
+    <p class="eyebrow reveal">02 · Puntuación VK EAM Maturity Model</p>
+    <h2 class="reveal">De <span class="grad">Critical</span> a <span class="grad">At Risk</span></h2>
+    <p class="lead reveal">12 dominios, 4 dimensiones y un tope por falta de datos. Pulsa ▶ para ver la evolución de marzo a noviembre.</p>
+    <div class="grid g2 mt2" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr))">
+      <div class="card reveal" style="--d:100ms;text-align:center">
+        <div class="chart"><svg id="gauge" viewBox="0 0 400 275" role="img" aria-label="Medidor de madurez"></svg></div>
+        <div class="row" style="justify-content:center;margin-top:-6px">
+          <button class="btn p" id="play">▶ Reproducir evolución</button>
+          <button class="btn ev" data-ev="k-score">Ver evidencia</button>
+        </div>
+        <p class="note mt">Pesos del modelo suman 94%; el global está normalizado. Los scores D1–D4 son juicio de consultor sobre la evidencia.</p>
+      </div>
+      <div class="card reveal" style="--d:200ms"><h3>12 dominios</h3><p class="sub">Marca negra = marzo · barra = noviembre · toca un dominio</p><div id="doms" data-run="0" style="margin-top:8px"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 ACTIVIDADES -->
+<section class="scene" id="actividades" data-t="Actividades">
+  <div class="wrap">
+    <p class="eyebrow reveal">03 · Esfuerzo vs resultado</p>
+    <h2 class="reveal">¿Las actividades <span class="grad">movieron la aguja</span>?</h2>
+    <p class="lead reveal">La puntuación refleja el comportamiento real del sistema, no el esfuerzo. Solo cuenta lo que se ve en los datos.</p>
+    <div class="grid g2 mt2">
+      <div class="card reveal" style="--d:100ms"><h3>23 registros · 8-may a 28-ago-2026</h3><p class="sub">Toca una actividad para ver qué dicen los datos</p><div id="acts" class="mt"></div></div>
+      <div class="card reveal" style="--d:200ms">
+        <h3>Cobertura del peso del modelo</h3><p class="sub">Asset y Work recibieron actividad; Risk, MRO y KPI no</p>
+        <div style="display:flex;height:44px;border-radius:14px;overflow:hidden;margin:16px 0 8px"><button class="ev" data-ev="cov-a" style="width:48.9%;background:var(--teal);color:#fff;font-weight:700;font-size:14px">49% con actividad</button><button class="ev" data-ev="cov-b" style="width:51.1%;background:var(--surface2);color:var(--muted);font-weight:700;font-size:14px">51% sin ninguna</button></div>
+        <div class="kpi-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px">
+          <button class="kpi ev" data-ev="k-score"><div class="v">2.12 → <span data-count="2.16" data-dec="2">0</span></div><div class="l">Efecto de las actividades</div><div class="d">+0.04 puntos</div></button>
+          <button class="kpi ev" data-ev="k-ruta"><div class="v">+0.60</div><div class="l">Ruta a ~2.8</div><div class="d">6 palancas posibles</div></button>
+        </div>
+        <div class="callout mt">Correlación no es causalidad: parte de la mejora de PM puede deberse a cambios del cliente.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 ACTIVOS -->
+<section class="scene" id="activos" data-t="Activos">
+  <div class="wrap">
+    <p class="eyebrow reveal">04 · Gestión de activos</p>
+    <h2 class="reveal">La jerarquía <span class="grad">cobró vida</span> en agosto</h2>
+    <p class="lead reveal">Antes no había data a nivel de asset. Desde septiembre, ~70% de los WOs ya se registran contra un asset.</p>
+    <div class="grid g3 mt2">
+      <button class="kpi ev reveal" data-ev="a-sys" style="--d:0ms"><div class="v"><span data-count="31">0</span></div><div class="l">Systems</div><div class="d">p. ej. AUTOCLAVES</div></button>
+      <button class="kpi ev reveal" data-ev="a-pos" style="--d:90ms"><div class="v"><span data-count="113">0</span></div><div class="l">Positions</div><div class="d">p. ej. Drake 1</div></button>
+      <button class="kpi ev reveal" data-ev="a-ast" style="--d:180ms"><div class="v"><span data-count="371">0</span></div><div class="l">Assets</div><div class="d">350 cargados de golpe en agosto</div></button>
+    </div>
+    <div class="grid g2">
+      <div class="card reveal" style="--d:100ms"><h3>% de WOs registrados contra un asset</h3><p class="sub">Por mes de reporte, WOs no cancelados</p><div class="chart" id="chAst" data-run="0"></div></div>
+      <div class="card reveal" style="--d:200ms"><h3>Top positions por costo acumulado</h3><p class="sub">Costo 2022–2026 (reporte EAM)</p><div class="chart" id="chCost" data-run="0"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 PM vs CM -->
+<section class="scene" id="pm" data-t="PM vs CM">
+  <div class="wrap">
+    <p class="eyebrow reveal">05 · Work management · Planning</p>
+    <h2 class="reveal">El balance <span class="grad">se invirtió</span></h2>
+    <p class="lead reveal">Elige un año y mira cómo cambia la mezcla de horas preventivas y correctivas.</p>
+    <div class="grid g2 mt2" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr))">
+      <div class="card reveal" style="--d:80ms;text-align:center">
+        <div class="seg" id="yrSeg"></div>
+        <div class="chart" style="max-width:300px;margin:12px auto 0"><svg id="donutPM" viewBox="0 0 200 200"></svg></div>
+        <p class="note" id="donutNote"></p>
+        <button class="btn mt" id="yrEv">Ver evidencia del año</button>
+      </div>
+      <div class="card reveal" style="--d:180ms"><h3>Efecto del calendario lunes a viernes</h3><p class="sub">PM programados en fin de semana vs lunes–martes · por mes</p><div class="chart" id="chWk" data-run="0"></div>
+        <div class="callout g mt">PM en fin de semana: 18% antes de junio → 3% después. Efecto secundario: lunes y martes concentran 72–76% de los PM en oct–nov.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 CUMPLIMIENTO -->
+<section class="scene" id="cumplimiento" data-t="PM Compliance">
+  <div class="wrap">
+    <p class="eyebrow reveal">06 · PM compliance</p>
+    <h2 class="reveal">¿Se hacen <span class="grad">a tiempo</span>?</h2>
+    <p class="lead reveal">10,000 WOs más recientes (25-ene a 23-nov-2026) · 6,838 PM. Cambia la base y mira cómo se mueven los porcentajes.</p>
+    <div class="row mt2 reveal"><div class="seg" id="cmpSeg"><button class="on" data-m="ex">Sin contar cancelados</button><button data-m="in">Contando cancelados</button></div></div>
+    <div class="grid g3 mt">
+      <button class="kpi ev reveal" data-ev="c-day" style="--d:0ms"><div class="v"><span id="cv1">49</span>%</div><div class="l">Cumplido el día programado</div><div class="d" id="cd1">2,623 de 5,387 PM vencidos</div></button>
+      <button class="kpi ev reveal" data-ev="c-1" style="--d:90ms"><div class="v"><span id="cv2">63</span>%</div><div class="l">Con ≤ 1 día de atraso</div><div class="d" id="cd2">3,400 de 5,387</div></button>
+      <button class="kpi ev reveal" data-ev="c-7" style="--d:180ms"><div class="v"><span id="cv3">89</span>%</div><div class="l">Con ≤ 7 días de atraso</div><div class="d" id="cd3">4,795 de 5,387 · ref. industria ≥ 90%</div></button>
+    </div>
+    <div class="grid g2">
+      <div class="card reveal" style="--d:100ms"><h3>Compliance mensual (%)</h3><p class="sub">Meses completos · toca un punto</p><div class="chart" id="chCmp" data-run="0"></div></div>
+      <div class="card reveal" style="--d:200ms"><h3>PM cancelados por mes de cancelación</h3><p class="sub">Julio: 701; 615 el 15-jul, todos de CALDERAS</p><div class="chart" id="chCan" data-run="0"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 EJECUCION -->
+<section class="scene" id="ejecucion" data-t="Programado vs ejecutado">
+  <div class="wrap">
+    <p class="eyebrow reveal">07 · Schedule vs execution</p>
+    <h2 class="reveal">Lo programado <span class="grad">frente a lo ejecutado</span></h2>
+    <p class="lead reveal">8,154 WOs no cancelados, 7,901 completados.</p>
+    <div class="grid g4 mt2">
+      <button class="kpi ev reveal" data-ev="x-adh" style="--d:0ms"><div class="ringw" data-run="0" style="width:74px;height:74px;float:right"><svg viewBox="0 0 100 100" style="transform:rotate(-90deg)"><circle class="rtrack" cx="50" cy="50" r="42"/><circle class="rv" cx="50" cy="50" r="42" stroke="var(--red)" style="--da:118.8"/></svg></div><div class="v"><span data-count="45">0</span>%</div><div class="l">Ejecutado a tiempo</div><div class="d">86% con ≤ 7 días</div></button>
+      <button class="kpi ev reveal" data-ev="x-plan" style="--d:90ms"><div class="v"><span data-count="76">0</span>%</div><div class="l">Programado con ≥ 1 día de anticipación</div><div class="d">22% son reactivos</div></button>
+      <button class="kpi ev reveal" data-ev="x-over" style="--d:180ms"><div class="v"><span data-count="141">0</span></div><div class="l">WOs abiertos con fecha vencida</div><div class="d">57% de los 247 abiertos · mediana 32 días</div></button>
+      <button class="kpi ev reveal" data-ev="x-conc" style="--d:270ms"><div class="v"><span data-count="65">0</span>%</div><div class="l">Concentrado en 3 técnicos</div><div class="d">17 asignados en total</div></button>
+    </div>
+    <div class="grid g2">
+      <div class="card reveal" style="--d:100ms"><h3>Programados con ≥ 1 día de anticipación</h3><p class="sub">% por tipo de WO · los reactivos se programan el mismo día</p><div class="chart" id="chLead" data-run="0"></div></div>
+      <div class="card reveal" style="--d:200ms"><h3>WOs abiertos vencidos por tipo</h3><p class="sub">Máximo 280 días de atraso</p><div class="chart" id="chOver" data-run="0"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 TECNICOS -->
+<section class="scene" id="tecnicos" data-t="Técnicos">
+  <div class="wrap">
+    <p class="eyebrow reveal">08 · Adopción de los técnicos</p>
+    <h2 class="reveal">Cada técnico, <span class="grad">con su evidencia</span></h2>
+    <p class="lead reveal">8 de 10 usuarios WORK-TECH solo acceden por la plataforma móvil. El anillo muestra el % de días laborables con horas.</p>
+    <div class="row mt2 reveal"><div class="seg" id="trSeg"><button class="on" data-t="mec">Mecánicos</button><button data-t="han">Handyman</button><button data-t="otr">Otros</button></div>
+      <label class="row note" style="gap:8px"><span class="sw" id="y25" role="switch" aria-checked="false" tabindex="0" style="display:inline-block"></span> Comparar con 2025</label></div>
+    <div class="grid g3 mt" id="tcs"></div>
+    <div class="grid g3 mt">
+      <button class="kpi ev reveal" data-ev="t-mec" style="--d:0ms"><div class="v">74 h</div><div class="l">Mecánicos: horas por persona al mes</div><div class="d"><span class="up">▲</span> 35 h en 2025 · el doble</div></button>
+      <button class="kpi ev reveal" data-ev="t-cov" style="--d:90ms"><div class="v"><span data-count="82">0</span>%</div><div class="l">WOs completados con horas &gt; 1 min</div><div class="d">92% si se cuentan registros de 1 minuto</div></button>
+      <button class="kpi ev reveal" data-ev="t-coh" style="--d:180ms"><div class="v"><span data-count="99.7" data-dec="1">0</span>%</div><div class="l">Usuario y empleado coinciden</div><div class="d">WOs cerrados por técnico con sus horas</div></button>
+    </div>
+  </div>
+</section>
+
+<!-- 10 PLATAFORMA -->
+<section class="scene" id="plataforma" data-t="Uso de la plataforma">
+  <div class="wrap">
+    <p class="eyebrow reveal">09 · Cómo usan la plataforma</p>
+    <h2 class="reveal">Status, cierres, comentarios y <span class="grad">horas reales</span></h2>
+    <p class="lead reveal">Cuatro ventanas de audit trail de 2026 más 2023-24, 6,988 comentarios y 9,461 registros de horas.</p>
+    <div class="row mt2 reveal"><div class="seg" id="plSeg"><button class="on" data-p="flow">Status</button><button data-p="close">Cierre</button><button data-p="comm">Comentarios</button><button data-p="hrs">Horas reales</button></div></div>
+    <div class="grid g2 mt">
+      <div class="card"><h3 id="plT"></h3><p class="sub" id="plS"></p><div class="chart" id="chPl" data-run="0"></div></div>
+      <div class="card"><h3>Lo que muestra</h3><div id="plI" style="font-size:14px"></div><div class="mt row" id="plK"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 HORAS -->
+<section class="scene" id="horas" data-t="Calidad de horas">
+  <div class="wrap">
+    <p class="eyebrow reveal">10 · Calidad de las horas</p>
+    <h2 class="reveal">Dos <span class="grad">alertas</span> en las horas</h2>
+    <p class="lead reveal">Registros simbólicos de 1 minuto y una tarifa que desapareció el 12-may-2026.</p>
+    <div class="grid g2 mt2">
+      <div class="card reveal" style="--d:80ms"><h3>Registros de 1 minuto (% de los registros)</h3><p class="sub">Ene-2025 a nov-2026 · 816 WOs solo traen registros de 1 minuto</p><div class="chart" id="chTiny" data-run="0"></div></div>
+      <div class="card reveal" style="--d:180ms"><h3>Horas con tarifa $0 (% del mes)</h3><p class="sub">2026 · desde el 12-may todas las horas</p><div class="chart" id="chRate" data-run="0"></div></div>
+    </div>
+    <div class="grid g3">
+      <button class="kpi ev reveal" data-ev="h-tiny" style="--d:0ms"><div class="v"><span data-count="893">0</span></div><div class="l">Registros de 1 minuto</div><div class="d">9.4% de los registros, solo 15 h</div></button>
+      <button class="kpi ev reveal" data-ev="h-rate" style="--d:90ms"><div class="v"><span data-count="3881">0</span> h</div><div class="l">Horas sin costear en 2026</div><div class="d">74% de las 5,210 h</div></button>
+      <button class="kpi ev reveal" data-ev="h-cost" style="--d:180ms"><div class="v">≈ $<span data-count="53">0</span>K</div><div class="l">Costo laboral faltante (estimado)</div><div class="d">vs $18.3K registrados · corregir antes de SAP B1</div></button>
+    </div>
+  </div>
+</section>
+
+<!-- 12 MATERIALES -->
+<section class="scene" id="materiales" data-t="Materiales">
+  <div class="wrap">
+    <p class="eyebrow reveal">11 · Gestión de materiales</p>
+    <h2 class="reveal">El ciclo está <span class="grad">cortado a la mitad</span></h2>
+    <p class="lead reveal">El 89% del costo de mantenimiento es material. Se despacha y se cuenta, pero requisiciones y compras no existen en EAM.</p>
+    <div class="cyc mt2 reveal" id="cyc"></div>
+    <div class="grid g2">
+      <div class="card reveal" style="--d:80ms"><h3>Transacciones de inventario</h3><p class="sub">18,845 en total</p><div class="chart" id="chInv" data-run="0"></div></div>
+      <div class="card reveal" style="--d:180ms"><h3>Costo de mantenimiento por año ($K)</h3><p class="sub">Acumulado $1.65M · 2026 de enero a noviembre</p><div class="chart" id="chYear" data-run="0"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 LINEA -->
+<section class="scene" id="linea" data-t="Línea y bad actors">
+  <div class="wrap">
+    <p class="eyebrow reveal">12 · Bad actors</p>
+    <h2 class="reveal">La línea de producción <span class="grad">en mapa de calor</span></h2>
+    <p class="lead reveal">Toca un equipo para ver sus fallas, costo y modos de falla según los comentarios. El orden de la línea es esquemático.</p>
+    <div class="row mt2 reveal"><div class="seg" id="heatSeg"><button class="on" data-h="r">WOs reactivos</button><button data-h="c">Costo acumulado</button><button data-h="i">Frecuencia</button></div><span class="note" id="heatNote"></span></div>
+    <div class="card mt reveal" style="padding:14px 8px"><div class="line-wrap"><div id="mainLine" data-run="0"></div></div></div>
+    <div class="grid g3">
+      <button class="kpi ev reveal" data-ev="b-top" style="--d:0ms"><div class="v">26%</div><div class="l">de los WOs reactivos en 10 equipos</div><div class="d">41% en 20 · 86 de 244 equipos = 80%</div></button>
+      <button class="kpi ev reveal" data-ev="b-toyo" style="--d:90ms"><div class="v"><span data-count="99">0</span></div><div class="l">WOs reactivos en TOYO</div><div class="d">mediana de 1 día entre WOs</div></button>
+      <button class="kpi ev reveal" data-ev="b-chain" style="--d:180ms"><div class="v"><span data-count="85">0</span></div><div class="l">WOs mencionan cadenas</div><div class="d">en 5 bad actors: un solo PMO</div></button>
+    </div>
+  </div>
+</section>
+
+<!-- 14 RCM -->
+<section class="scene" id="rcm" data-t="Candidatos RCM">
+  <div class="wrap">
+    <p class="eyebrow reveal">13 · Candidatos a RCM</p>
+    <h2 class="reveal">Quién entra <span class="grad">primero</span></h2>
+    <p class="lead reveal">Frecuencia de fallas + recurrencia + costo + falla dominante. Todavía no es un ranking de criticidad.</p>
+    <div class="grid g2 mt2">
+      <div class="card reveal" style="--d:80ms"><h3>Distribución de WOs reactivos</h3><p class="sub">% acumulado por equipos ordenados · es plana: priorizar por criticidad y costo</p><div class="chart" id="chPar" data-run="0"></div></div>
+      <div class="reveal" style="--d:180ms;display:grid;gap:12px" id="tiers"></div>
+    </div>
+    <div class="card mt2 reveal" style="--d:100ms"><h3>Brechas de RCM readiness</h3><div class="chips mt" id="gaps"></div></div>
+  </div>
+</section>
+
+<!-- 15 RUTA -->
+<section class="scene" id="ruta" data-t="Ruta a 2.8">
+  <div class="wrap">
+    <p class="eyebrow reveal">14 · Ruta a ~2.8</p>
+    <h2 class="reveal">Arma tu <span class="grad">plan de 12 meses</span></h2>
+    <p class="lead reveal">Activa las palancas y mira cuánto sube la puntuación. Es un simulador indicativo: asume que cada dominio alcanza su score objetivo.</p>
+    <div class="grid g2 mt2" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))">
+      <div class="card reveal" style="--d:80ms">
+        <div class="row" style="justify-content:space-between"><div><div class="sub">Puntuación proyectada</div><div style="font-family:var(--display);font-size:54px;font-weight:700;line-height:1" id="proj">2.16</div></div><div style="text-align:right"><span class="tag" id="band">At Risk</span><div class="sub mt" id="gain">+0.00</div></div></div>
+        <div class="meter" id="meter"><div class="f" id="mf"></div></div>
+        <div id="levers" style="display:grid;gap:8px"></div>
+        <p class="note mt">Incluso con las 6 palancas el global queda en At Risk (2.0–2.9); llegar a 3.0 (Acceptable) exige además subir Work Management.</p>
+      </div>
+      <div class="card reveal" style="--d:180ms">
+        <div class="row" style="justify-content:space-between"><h3>Hoja de ruta</h3><span class="chip"><b id="prog">0</b>/12 acciones</span></div>
+        <p class="sub">Marca lo que ya quieres comprometer</p>
+        <div id="hz" class="mt"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 16 CIERRE -->
+<section class="scene" id="cierre" data-t="Cierre">
+  <div class="wrap" style="text-align:center">
+    <p class="eyebrow reveal">Cierre</p>
+    <h2 class="reveal" style="font-size:clamp(34px,6vw,72px)">Los datos ya <span class="grad">cuentan la historia</span></h2>
+    <p class="lead reveal" style="margin:10px auto 0">Falta cerrar el ciclo de materiales, corregir la tarifa y pasar del registro posterior al tiempo real.</p>
+    <div class="grid g3 mt2" style="text-align:left">
+      <div class="card reveal" style="--d:0ms"><h3>Avances</h3><ul style="padding-left:18px;font-size:14px;display:grid;gap:6px;margin-top:8px"><li>PM pasó de 45.6% a 74.6% de las horas</li><li>371 assets y ~70% de los WOs ya los usan</li><li>Técnicos mobile-only: 81–91% de los pasos de status</li><li>Horas reales en WOs de técnicos: 80% → 98%</li></ul></div>
+      <div class="card reveal" style="--d:90ms"><h3>Alertas</h3><ul style="padding-left:18px;font-size:14px;display:grid;gap:6px;margin-top:8px"><li>Tarifa $0 desde el 12-may-2026</li><li>Requisitions, POs e Integration sin data</li><li>PM compliance 49% el día; cancelaciones de PM subiendo</li><li>Assigned To cayó a ~77% en sep–oct</li></ul></div>
+      <div class="card reveal" style="--d:180ms"><h3>Pendientes de datos</h3><ul style="padding-left:18px;font-size:14px;display:grid;gap:6px;margin-top:8px"><li>Qué marca realmente ava_mobile</li><li>Huecos del audit trail: 5–31 mar y 22-may a 14-jul</li><li>Causa de la tarifa en cero</li><li>Completitud del asset master</li></ul></div>
+    </div>
+    <div class="logos c reveal" style="--d:240ms"><span class="lg" style="--lh:50px"><img data-logo="carmela" alt="Carmela Foods"></span><span class="sep" aria-hidden="true"></span><span class="lg" style="--lh:30px"><img data-logo="vk" alt="VisualK"></span><span class="lg" style="--lh:38px"><img data-logo="octave" alt="Octave"></span></div>
+    <div class="row mt2" style="justify-content:center"><button class="btn p" id="party">🎉 Celebrar</button><button class="btn" data-go="portada">↑ Volver al inicio</button></div>
+    <p class="foot">Fuentes: reporte EAM del 23-nov-2026 y de marzo, historial de 10,000 WOs, horas 2025 y 2026, audit trail de WOs, comentarios de WOs, listado de usuarios y empleados, log de actividades Advanced Assistance. Todos los números abren su evidencia.</p>
+  </div>
+</section>
+</main>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dTitle" aria-hidden="true">
+  <button class="x" id="dx" aria-label="Cerrar evidencia">✕</button>
+  <p class="eyebrow">Evidencia</p>
+  <h3 id="dTitle"></h3>
+  <div class="big" id="dVal"></div>
+  <div id="dBody"></div>
+</aside>
+<div class="lvl" id="lvl"><b>¡Nivel superado!</b><span>Critical → At Risk</span></div>
+<div class="tip" id="tip"></div>
+<canvas id="cf"></canvas>
+
+<script>
+(() => {
+'use strict';
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const fmt = (n, d = 0) => Number(n).toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const root = document.documentElement;
+const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+const css = v => getComputedStyle(root).getPropertyValue(v).trim();
+const LOGO = {carmela:'data:image/jpeg;base64,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',octave:'data:image/jpeg;base64,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',vk:'data:image/jpeg;base64,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'};
+$$('img[data-logo]').forEach(i => { i.src = LOGO[i.dataset.logo]; });
+
+
+/* ───────── Evidence registry ───────── */
+const EV = {}; let evc = 0; const seen = new Set();
+const reg = o => { const id = 'e' + (++evc); EV[id] = o; return id; };
+const tbl = (head, rows) => `<div class="tw"><table><thead><tr>${head.map(h => `<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+const SRC = {
+  rep: 'Reporte EAM del 23-nov-2026 (EAM_Data_Analysis_Report_2026-11-23.xlsx)',
+  rep0: 'Reporte EAM de marzo 2026 (EAM_Data_Analysis_Report_Carmela_Food_2026.xlsx)',
+  wo: 'Historial de 10,000 WOs (25-ene a 23-nov-2026)',
+  h25: 'Horas de labor 2025 (5,222 registros)',
+  h26: 'Horas de labor 2026 (9,461 registros)',
+  aud: 'Audit trail de WOs (2023-24 y cuatro ventanas de 2026)',
+  com: 'Comentarios de WOs (6,988 líneas)',
+  usr: 'Listado de usuarios (26) y de empleados (16)',
+  act: 'Log de actividades Advanced Assistance (23 registros)'
+};
+const toast = (t) => { const l = $('#lvl'); l.innerHTML = t; l.classList.add('show'); setTimeout(() => l.classList.remove('show'), 2600); };
+function openEv(id) {
+  const e = EV[id]; if (!e) return;
+  $('#dTitle').textContent = e.title;
+  $('#dVal').innerHTML = e.value || '';
+  $('#dBody').innerHTML =
+    (e.how ? `<h4>Cómo se calculó</h4><p>${e.how}</p>` : '') +
+    (e.rows ? `<h4>Datos</h4>${tbl(e.head, e.rows)}` : '') +
+    (e.extra || '') +
+    (e.note ? `<h4>Ojo</h4><p>${e.note}</p>` : '') +
+    `<h4>Fuente</h4><p class="src">${e.src}</p>`;
+  $('#drawer').classList.add('open'); $('#scrim').classList.add('open'); $('#drawer').setAttribute('aria-hidden', 'false');
+  $('#drawer').scrollTop = 0; $('#dx').focus({ preventScroll: true });
+  if (!seen.has(id)) { seen.add(id); $('#xpn').textContent = seen.size; const n = seen.size, t = Object.keys(EV).length;
+    if (n === 5 || n === 15 || n === 30 || n === t) { toast(`<b>${n === t ? '¡Auditor total!' : 'Explorador nivel ' + (n === 5 ? 1 : n === 15 ? 2 : 3)}</b><span>${n} evidencias abiertas</span>`); confetti(innerWidth / 2, innerHeight * .3); } }
+}
+function closeEv() { $('#drawer').classList.remove('open'); $('#scrim').classList.remove('open'); $('#drawer').setAttribute('aria-hidden', 'true'); }
+
+/* ───────── Static evidence ───────── */
+EV['k-score'] = { title: 'Puntuación global de madurez', value: '1.81 → <span class="up">2.16</span>', how: 'Promedio ponderado de 12 dominios (pesos suman 94%, normalizado a 100%). Domain score = D1×0.30 + D2×0.30 + D3×0.20 + D4×0.20. Los dominios cuyo KPI no se puede calcular quedan topados en 2.0 (DATA GAP).', head: ['Corte', 'Puntuación', 'Banda'], rows: [['Marzo 2026', '1.81', 'Critical'], ['Reporte 23-nov', '1.95', 'Límite'], ['Con historial de WOs', '2.12', 'At Risk'], ['Con actividades y evidencia de assets', '2.16', 'At Risk']], note: 'Gran parte del alza de WM2 y WM3 es medición (salen del tope DATA GAP), no solo mejora. Con los datos validados el global sería ~2.3.', src: SRC.rep + ' · ' + SRC.wo + ' · ' + SRC.act };
+EV['k-wos'] = { title: 'WOs totales', value: '29,512', how: 'Total de órdenes de trabajo creadas desde nov-2022 según el reporte. En marzo de 2026 eran 20,091 (+9,421, +47%).', head: ['Año', 'WOs creados'], rows: [['2022', '560'], ['2023', '4,350'], ['2024', '5,712'], ['2025', '6,733'], ['2026 (ene–nov)', '12,157']], note: 'Noviembre de 2026 es parcial. El 8.7% de los WOs está cancelado: los completados reales son 26,644 (90.3%).', src: SRC.rep };
+EV['k-hours'] = { title: 'Horas de labor registradas', value: '15,462 h', how: 'Suma de horas booked en el reporte: 15,430.6 h normales más ~31 h de overtime y tiempo sin WO. En marzo eran 10,946 h (+4,516 h, +41%).', head: ['Año', 'Horas normales'], rows: [['2022', '213.9'], ['2023', '2,781.7'], ['2024', '3,909.2'], ['2025', '3,332.9'], ['2026 (ene–nov)', '5,193.0']], note: 'Las horas por año cuadran 100% con los exports de horas de 2025 (3,363.9 h) y 2026.', src: SRC.rep + ' · ' + SRC.h25 + ' · ' + SRC.h26 };
+EV['k-inv'] = { title: 'Transacciones de inventario', value: '18,845', how: 'Suma de todas las transacciones de los stores ALMACEN CARMELA y AL-PRO-CARMELA. En marzo eran 15,570 (+3,275, +21%).', head: ['Tipo', 'Transacciones'], rows: [['Despachos (Issue)', '9,516'], ['Recepciones', '4,430'], ['Stock takes', '4,219'], ['Correcciones', '679'], ['Misceláneo', '1']], src: SRC.rep };
+EV['k-pm'] = { title: 'Horas PM en 2026', value: '74.6%', how: 'Horas booked en WOs tipo PM ÷ (PM + CM) en 2026 (ene–nov). La meta de clase mundial es 80%.', head: ['Año', 'PM (h)', 'CM (h)', '% PM'], rows: [['2022', '53', '161', '24.8%'], ['2023', '1,231', '1,551', '44.3%'], ['2024', '1,556', '2,354', '39.8%'], ['2025', '1,535', '1,829', '45.6%'], ['2026', '3,874', '1,319', '<b>74.6%</b>']], note: 'En marzo se hablaba de 45% PM porque se usaba el acumulado histórico; el primer trimestre de 2026 ya iba en 78%. Acumulado 2022–2026: 53.3% PM.', src: SRC.rep };
+EV['cov-a'] = { title: 'Dominios con actividad', value: '49%', how: 'AM1, AM2, WM1, WM2 y WM3 suman 46 de 94 puntos de peso del modelo.', src: SRC.act };
+EV['cov-b'] = { title: 'Dominios sin actividad', value: '51%', how: 'RM1, MRO1–MRO5 y KPI1 suman 48 de 94 puntos de peso. Seis de ellos están en 1.0–2.0, por eso la puntuación se mueve poco.', src: SRC.act };
+EV['k-ruta'] = { title: 'Ruta a ~2.8', value: '+0.60', how: 'Suma de la ganancia potencial de 6 palancas si cada una alcanza su score objetivo (ver simulador al final).', src: 'Cálculo VisualK sobre el scorecard' };
+EV['a-sys'] = { title: 'Systems cargados', value: '31', how: 'Objetos tipo System en el registro de assets. 18 se crearon en agosto de 2026.', src: SRC.rep };
+EV['a-pos'] = { title: 'Positions cargadas', value: '113', how: 'Objetos tipo Position. 40 se crearon en agosto de 2026.', src: SRC.rep };
+EV['a-ast'] = { title: 'Assets cargados', value: '371', how: '350 assets se crearon en agosto de 2026 (carga masiva tras la revisión del asset master) y 19 en noviembre. Total de objetos: 515.', note: 'El 22% de los movimientos de assets está sin vincular a la estructura (58 de 265). La completitud de atributos (clase, fabricante, modelo, S/N) no se pudo medir.', src: SRC.rep + ' · ' + SRC.act };
+EV['x-adh'] = { title: 'Ejecutado a tiempo', value: '45%', how: 'WOs completados (no cancelados) cuya fecha de cierre es igual o anterior al Sched. End Date, sobre 7,901 completados.', head: ['Atraso permitido', '% ejecutado'], rows: [['0 días', '45.2%'], ['≤ 1 día', '60.2%'], ['≤ 3 días', '74.6%'], ['≤ 7 días', '86.2%']], src: SRC.wo };
+EV['x-plan'] = { title: 'Programados con anticipación', value: '76%', how: 'WOs no cancelados con Sched. Start al menos 1 día después de la fecha de reporte. Los reactivos (Breakdown, Corrective, Emergency) son 1,816 de 8,154 (22%).', note: 'Es un indicador por conteo; no mide si el WO tenía job plan o materiales listos.', src: SRC.wo };
+EV['x-over'] = { title: 'WOs abiertos vencidos', value: '141', how: 'De 247 WOs abiertos, 141 tienen Sched. End Date anterior al 23-nov-2026. Mediana de atraso: 32 días; máximo: 280.', head: ['Tipo', 'Vencidos'], rows: [['Breakdown', '57'], ['PM', '35'], ['Facility Inspection', '28'], ['Corrective', '18'], ['Inspection', '2'], ['ISO22000', '1']], src: SRC.wo };
+EV['x-conc'] = { title: 'Concentración en técnicos', value: '65%', how: '17 asignados. Los tres con más WOs: 1,997, 1,817 y 1,212 de 8,154.', note: 'También: lunes y martes concentran 48% de los PM; hasta 40 PM en un día; 10.5% en fin de semana en toda la muestra.', src: SRC.wo };
+EV['t-mec'] = { title: 'Horas por persona al mes (mecánicos)', value: '74 h <span class="sub">vs 35 h en 2025</span>', how: 'Horas booked por mecánicos ÷ persona-meses activos (primer a último registro de cada uno).', head: ['Grupo', '2025', '2026'], rows: [['Mecánicos (horas)', '1,998', '4,087'], ['Persona-meses', '56.3', '55.6'], ['Horas por persona-mes', '35.5', '73.5'], ['Handyman por persona-mes', '54.4', '68.1'], ['Handyman, % de las horas', '38%', '22%']], note: 'El 6106 salió y el 6165 recién ingresó, por eso baja la parte de handyman.', src: SRC.h25 + ' · ' + SRC.h26 };
+EV['t-cov'] = { title: 'WOs completados con horas', value: '82% <span class="sub">(92% con registros de 1 minuto)</span>', how: 'WOs PM, Breakdown y Corrective completados en la muestra de 2026 con al menos un registro de horas > 1 minuto.', head: ['Tipo', 'Con horas > 1 min', 'Con cualquier registro'], rows: [['PM', '86.2%', '97.8%'], ['Breakdown', '69.2%', '76.2%'], ['Corrective', '67.0%', '72.7%'], ['Total (7,085 WOs)', '<b>82.0%</b>', '92.3%']], note: '816 WOs solo traen registros de 1 minuto: 616 del 6048 y 173 del 6103.', src: SRC.wo + ' · ' + SRC.h26 };
+EV['t-coh'] = { title: 'Usuario y empleado coinciden', value: '99.7%', how: 'En los WOs donde un usuario de técnico marcó Ready to Complete (audit trail), se verifica si el empleado asociado a ese usuario tiene horas en el WO.', head: ['Ventana', 'WOs con horas reales', 'Coinciden'], rows: [['Ene–Mar 2026', '1,212', '99.4%'], ['Abr–May', '1,129', '99.8%'], ['Jul–Sep', '1,243', '99.8%'], ['Sep–Nov', '1,274', '99.8%']], note: 'No se ve el usuario que creó cada registro de horas; esta es la mejor aproximación. 87 comentarios de 2026 aclaran “realizado por…”: la atribución por persona tiene margen de error.', src: SRC.aud + ' · ' + SRC.h26 };
+EV['h-tiny'] = { title: 'Registros de 1 minuto', value: '893', how: 'Registros con 0.0167 h (1 minuto) en 2026: 9.4% de los 9,461, pero solo 15 h. Parecen horas simbólicas para poder cerrar el WO.', head: ['Técnico', 'Registros', '% de 1 minuto'], rows: [['6048', '1,939', '33.2%'], ['6103', '2,544', '8.6%'], ['6082', '1,603', '1.0%'], ['Resto', '3,375', '<1%']], note: 'Empezó en sep-2025 (6%), llegó a 25% en marzo de 2026 y bajó a 3% desde agosto.', src: SRC.h25 + ' · ' + SRC.h26 };
+EV['h-rate'] = { title: 'Horas con tarifa $0', value: '3,881 h', how: 'Desde el 12-may-2026 el 100% de los registros trae boo_rate = 0. En 2026: 5,210 h con horas reales, de las cuales 3,881 sin tarifa.', head: ['Período', 'Registros con tarifa $0'], rows: [['Ene–Abr 2026', '0%'], ['May 2026', '65% (desde el 12)'], ['Jun–Nov 2026', '100%'], ['2025 completo', '0.02%']], note: 'Causa por confirmar (tarifa vencida o cambio de configuración).', src: SRC.h26 + ' · ' + SRC.h25 };
+EV['h-cost'] = { title: 'Costo laboral faltante', value: '≈ $53K', how: 'Horas con tarifa $0 × última tarifa conocida de cada persona ($11.5–$18.3 por hora). Para el 6165 se usó la tarifa del 6144 ($11.5).', head: ['Concepto', 'Monto'], rows: [['Costo laboral registrado 2026', '$18.3K'], ['Estimado sin costear', '≈ $53.2K'], ['Total esperado', '≈ $71.5K'], ['Costo laboral 2025 (incluye contratado)', '$84.5K']], note: 'Afecta KPI1 (precisión financiera) y la integración con SAP B1.', src: SRC.h26 + ' · ' + SRC.rep };
+EV['b-top'] = { title: 'Distribución de WOs reactivos', value: '26% / 41%', how: '1,816 WOs Breakdown, Corrective y Emergency (no cancelados) en 244 equipos. Los 10 primeros acumulan 26%; los 20 primeros, 41%; hacen falta 86 equipos para llegar al 80%.', note: 'La distribución es plana: priorizar por criticidad y costo, no solo por frecuencia.', src: SRC.wo };
+EV['b-toyo'] = { title: 'TOYO', value: '99 WOs reactivos', how: 'El equipo con más fallas reactivas de 2026: 93 Breakdown, 11 meses con eventos y una mediana de 1.0 día entre WOs.', note: 'Solo el 47% de sus WOs reactivos tiene comentario: hay que documentar mejor la causa.', src: SRC.wo + ' · ' + SRC.com };
+EV['b-chain'] = { title: 'Cadenas', value: '85 WOs', how: 'WOs reactivos con comentario que mencionan cadena, sprocket o catarina: 85 de 1,183. Aparecen en Conveyor llenado de cestos (14), Hanging Machine (9), VEMAG Filler (7), Toptier (6) y Zambelli (5).', note: 'Un solo PMO de cadenas (lubricación, tensión, desgaste) serviría a cinco bad actors.', src: SRC.com };
+
+/* ───────── Chart helpers ───────── */
+const play = host => { host.dataset.run = '0'; requestAnimationFrame(() => requestAnimationFrame(() => { host.dataset.run = '1'; })); };
+const col = n => `var(--${n})`;
+function axes(W, H, pad, max, ticks, f) {
+  let g = ''; const ih = H - pad.t - pad.b;
+  for (let i = 0; i <= ticks; i++) { const y = pad.t + ih - ih * i / ticks; g += `<line class="grid-l" x1="${pad.l}" x2="${W - pad.r}" y1="${y}" y2="${y}"/><text class="ax" x="${pad.l - 6}" y="${y + 3}" text-anchor="end">${f(max * i / ticks)}</text>`; }
+  return g;
+}
+function vbars(host, { data, max, W = 560, H = 250, f = v => fmt(v), unit = '', pad = { l: 40, r: 8, t: 22, b: 30 }, ticks = 4 }) {
+  const iw = W - pad.l - pad.r, ih = H - pad.t - pad.b, n = data.length, bw = Math.min(54, iw / n * .62);
+  let g = axes(W, H, pad, max, ticks, f);
+  data.forEach((d, i) => {
+    const x = pad.l + iw / n * i + (iw / n - bw) / 2, h = ih * d.v / max, y = pad.t + ih - h;
+    g += `<rect class="bar" style="--i:${i}" x="${x}" y="${y}" width="${bw}" height="${Math.max(h, 1)}" rx="5" fill="${d.c || col('brand')}" data-ev="${d.ev}" data-tip="${d.tip || d.l + ': ' + f(d.v) + unit}" tabindex="0" role="button" aria-label="${d.l}: ${f(d.v)}${unit}. Ver evidencia"/>`;
+    g += `<text class="val fade" x="${x + bw / 2}" y="${y - 6}" text-anchor="middle">${f(d.v)}${unit}</text><text class="ax" x="${x + bw / 2}" y="${H - pad.b + 14}" text-anchor="middle">${d.l}</text>`;
+  });
+  host.innerHTML = `<svg viewBox="0 0 ${W} ${H}">${g}</svg>`; play(host);
+}
+function gbars(host, { labels, series, max, W = 560, H = 250, f = v => fmt(v), pad = { l: 40, r: 8, t: 22, b: 30 } }) {
+  const iw = W - pad.l - pad.r, ih = H - pad.t - pad.b, n = labels.length, gw = iw / n, bw = Math.min(30, gw * .34);
+  let g = axes(W, H, pad, max, 4, f);
+  labels.forEach((l, i) => {
+    series.forEach((s, k) => {
+      const v = s.values[i], x = pad.l + gw * i + gw / 2 - bw * series.length / 2 + k * bw, h = ih * v / max, y = pad.t + ih - h;
+      g += `<rect class="bar" style="--i:${i}" x="${x}" y="${y}" width="${bw - 2}" height="${Math.max(h, 1)}" rx="4" fill="${s.c}" data-ev="${s.evs[i]}" data-tip="${l} · ${s.name}: ${f(v)}" tabindex="0" role="button" aria-label="${l} ${s.name}: ${f(v)}. Ver evidencia"/>`;
+    });
+    g += `<text class="ax" x="${pad.l + gw * i + gw / 2}" y="${H - pad.b + 14}" text-anchor="middle">${l}</text>`;
+  });
+  g += series.map((s, k) => `<g transform="translate(${pad.l + k * 150},8)"><rect width="10" height="10" rx="3" fill="${s.c}"/><text class="cap" x="15" y="9">${s.name}</text></g>`).join('');
+  host.innerHTML = `<svg viewBox="0 0 ${W} ${H}">${g}</svg>`; play(host);
+}
+function hbars(host, { data, max, W = 560, f = v => fmt(v), unit = '', rowH = 30, lw = 110 }) {
+  const H = data.length * rowH + 14, iw = W - lw - 60; let g = '';
+  data.forEach((d, i) => {
+    const y = 6 + i * rowH, w = Math.max(iw * d.v / max, 2);
+    g += `<text class="ax" x="${lw - 8}" y="${y + 15}" text-anchor="end" style="font-size:11px">${d.l}</text><rect class="hbar" style="--i:${i}" x="${lw}" y="${y + 3}" width="${w}" height="${rowH - 10}" rx="6" fill="${d.c || col('brand')}" data-ev="${d.ev}" data-tip="${d.l}: ${f(d.v)}${unit}" tabindex="0" role="button" aria-label="${d.l}: ${f(d.v)}${unit}. Ver evidencia"/><text class="val fade" x="${lw + w + 6}" y="${y + 17}">${f(d.v)}${unit}</text>`;
+  });
+  host.innerHTML = `<svg viewBox="0 0 ${W} ${H}">${g}</svg>`; play(host);
+}
+function lines(host, { labels, series, min = 0, max = 100, W = 560, H = 260, f = v => fmt(v), pad = { l: 40, r: 26, t: 26, b: 30 }, refs = [], skip = 1, ticks = 4 }) {
+  const iw = W - pad.l - pad.r, ih = H - pad.t - pad.b, n = labels.length, X = i => pad.l + iw * (n === 1 ? .5 : i / (n - 1)), Y = v => pad.t + ih - ih * (v - min) / (max - min);
+  let g = ''; for (let i = 0; i <= ticks; i++) { const v = min + (max - min) * i / ticks, y = Y(v); g += `<line class="grid-l" x1="${pad.l}" x2="${W - pad.r}" y1="${y}" y2="${y}"/><text class="ax" x="${pad.l - 6}" y="${y + 3}" text-anchor="end">${f(v)}</text>`; }
+  refs.forEach(r => { g += `<line x1="${pad.l}" x2="${W - pad.r}" y1="${Y(r.v)}" y2="${Y(r.v)}" stroke="${r.c}" stroke-dasharray="5 5" stroke-width="1.5"/><text class="cap" x="${W - pad.r}" y="${Y(r.v) - 5}" text-anchor="end">${r.l}</text>`; });
+  labels.forEach((l, i) => { if (i % skip === 0) g += `<text class="ax" x="${X(i)}" y="${H - pad.b + 15}" text-anchor="middle">${l}</text>`; });
+  series.forEach((s, k) => {
+    const d = s.values.map((v, i) => `${i ? 'L' : 'M'}${X(i).toFixed(1)} ${Y(v).toFixed(1)}`).join('');
+    g += `<path class="ln" d="${d}" stroke="${s.c}"/>`;
+    s.values.forEach((v, i) => { if (s.evs && s.evs[i]) g += `<circle class="dot" cx="${X(i)}" cy="${Y(v)}" r="5.5" fill="${s.c}" stroke="var(--surface)" stroke-width="2" data-ev="${s.evs[i]}" data-tip="${labels[i]} · ${s.name}: ${f(v)}" tabindex="0" role="button" aria-label="${labels[i]} ${s.name}: ${f(v)}. Ver evidencia"/>`; });
+  });
+  g += series.map((s, k) => `<g transform="translate(${pad.l + k * 170},8)"><rect width="10" height="10" rx="3" fill="${s.c}"/><text class="cap" x="15" y="9">${s.name}</text></g>`).join('');
+  host.innerHTML = `<svg viewBox="0 0 ${W} ${H}">${g}</svg>`; $$('.ln', host).forEach(pth => pth.style.setProperty('--L', Math.ceil(pth.getTotalLength()) + 2)); play(host);
+}
+function stack(host, { labels, series, max = 100, W = 560, H = 260, f = v => fmt(v), pad = { l: 40, r: 8, t: 30, b: 30 } }) {
+  const iw = W - pad.l - pad.r, ih = H - pad.t - pad.b, n = labels.length, gw = iw / n, bw = Math.min(56, gw * .6);
+  let g = axes(W, H, pad, max, 4, f);
+  labels.forEach((l, i) => {
+    let acc = 0;
+    series.forEach(s => { const v = s.values[i]; if (!v) return; const h = ih * v / max, y = pad.t + ih - ih * acc / max - h, x = pad.l + gw * i + (gw - bw) / 2;
+      g += `<rect class="bar" style="--i:${i}" x="${x}" y="${y}" width="${bw}" height="${h}" fill="${s.c}" data-ev="${s.evs[i]}" data-tip="${l} · ${s.name}: ${f(v)}" tabindex="0" role="button" aria-label="${l} ${s.name}: ${f(v)}. Ver evidencia"/>`;
+      if (h > 16) g += `<text class="val fade" fill="#fff" style="fill:#fff" x="${x + bw / 2}" y="${y + h / 2 + 4}" text-anchor="middle">${f(v)}</text>`; acc += v; });
+    g += `<text class="ax" x="${pad.l + gw * i + gw / 2}" y="${H - pad.b + 14}" text-anchor="middle">${l}</text>`;
+  });
+  g += series.map((s, k) => `<g transform="translate(${pad.l + k * 130},8)"><rect width="10" height="10" rx="3" fill="${s.c}"/><text class="cap" x="15" y="9">${s.name}</text></g>`).join('');
+  host.innerHTML = `<svg viewBox="0 0 ${W} ${H}">${g}</svg>`; play(host);
+}
+const ring = (pct, color, ghost) => `<div class="ringw" data-run="0" style="width:84px;height:84px"><svg viewBox="0 0 100 100" style="transform:rotate(-90deg)"><circle class="rtrack" cx="50" cy="50" r="42"/>${ghost != null ? `<circle class="rg" cx="50" cy="50" r="42" stroke-dasharray="${(ghost * 2.639).toFixed(1)} 264" opacity=".9"/>` : ''}<circle class="rv" cx="50" cy="50" r="42" stroke="${color}" style="--da:${(pct * 2.639).toFixed(1)}"/></svg></div>`;
+
+/* ───────── Section 01: charts ───────── */
+(function () {
+  const woRows = { 2022: 560, 2023: 4350, 2024: 5712, 2025: 6733, 2026: 12157 };
+  vbars($('#chWO'), { max: 14000, data: Object.entries(woRows).map(([y, v], i) => ({ l: y === '2026' ? '2026*' : y, v, c: i === 4 ? col('teal') : col('brand'), ev: reg({ title: `WOs creados en ${y}`, value: fmt(v), how: y === '2026' ? 'Enero a noviembre de 2026: promedio de 1,105 WOs al mes, pico de 1,966 en mayo. Octubre cerró en 611.' : 'WOs creados en el año según el reporte EAM.', note: y === '2022' ? 'Solo noviembre y diciembre: el sistema arrancó en nov-2022.' : '', src: SRC.rep }) })) });
+  const PM = [[53, 161], [1231, 1551], [1556, 2354], [1535, 1829], [3874, 1319]], yrs = [2022, 2023, 2024, 2025, 2026];
+  const mk = (i, k) => reg({ title: `${k ? 'Horas CM' : 'Horas PM'} · ${yrs[i]}`, value: fmt(PM[i][k]) + ' h', how: `Horas booked en WOs de tipo ${k ? 'correctivo (CM)' : 'preventivo (PM)'}. Participación PM del año: ${(PM[i][0] / (PM[i][0] + PM[i][1]) * 100).toFixed(1)}%.`, src: SRC.rep });
+  gbars($('#chPMCM'), { labels: yrs.map(y => y === 2026 ? '2026*' : y), max: 4000, series: [{ name: 'PM', c: col('teal'), values: PM.map(p => p[0]), evs: yrs.map((_, i) => mk(i, 0)) }, { name: 'CM', c: col('red'), values: PM.map(p => p[1]), evs: yrs.map((_, i) => mk(i, 1)) }] });
+})();
+
+/* ───────── Section 02: maturity ───────── */
+const DOM = [
+  { id: 'AM1', n: 'Asset Data Quality', w: 10, m: 1.3, v: 2.0, gap: 1, ind: 2.9, d: [4, 3, 2, 2], t: '371 assets cargados en agosto; desde septiembre ~70% de los WOs se registran contra un asset (0% hasta julio). Tope 2.0 porque no se mide la completitud de atributos (clase, fabricante, modelo, S/N). Indicativo 2.9 al medirla con el asset master de junio.' },
+  { id: 'AM2', n: 'Asset Hierarchy & Taxonomy', w: 8, m: 2.3, v: 2.8, d: [3, 3, 3, 2], t: 'Jerarquía de 31 systems, 113 positions y 371 assets en uso. 22% de los movimientos de assets sin vincular (58 de 265). La tarea Asset Hierarchy se canceló: no hay taxonomía formal y Class está vacío.' },
+  { id: 'WM1', n: 'Work Order Management', w: 10, m: 3.3, v: 3.4, d: [4, 4, 2, 3], t: '29,512 WOs; 90.3% completados reales y 8.7% cancelados. Class vacío en 92.7%. Los técnicos ejecutan 81–91% de los pasos de status; cierre con revisión desde julio. Subiría a 3.6 si se corrigen Class y Assigned To.' },
+  { id: 'WM2', n: 'PM Compliance & Coverage', w: 10, m: 2.0, v: 2.9, med: 1, d: [4, 3, 2, 2], t: 'Medido en 10,000 WOs: 49% el día, 63% ≤ 1 día, 89% ≤ 7 días. 97% de los PM con ventana de 1 día. 19.9% de los PM cancelados (615 de Calderas el 15-jul). PM en fin de semana: 18% → 3%.' },
+  { id: 'WM3', n: 'Planning & Scheduling', w: 8, m: 1.3, v: 2.5, med: 1, d: [3, 2, 3, 2], t: 'Adherencia al día 45% (86% ≤ 7 días). 141 WOs vencidos (57% de los abiertos). 3 técnicos concentran 65% de los WOs. Lunes y martes concentran 72–76% de los PM en oct–nov. Assigned To cayó a ~77% en sep–oct.' },
+  { id: 'RM1', n: 'Risk-Based Prioritization', w: 9, m: 1.0, v: 1.0, gap: 1, d: [1, 1, 1, 1], t: 'No hay índice de criticidad ni de riesgo por equipo en los datos. Ya hay bad actors y candidatos a RCM, pero falta el taller de Equipment Ranking.' },
+  { id: 'MRO1', n: 'ABC Classification', w: 7, m: 1.0, v: 1.0, gap: 1, d: [1, 1, 1, 1], t: 'Sin evidencia de clasificación ABC en el reporte.' },
+  { id: 'MRO2', n: 'EOQ & Reorder', w: 7, m: 1.0, v: 1.0, gap: 1, d: [1, 1, 1, 1], t: 'Sin evidencia de puntos de reorden ni EOQ configurados.' },
+  { id: 'MRO3', n: 'Inventory Cycle Counting', w: 7, m: 2.0, v: 2.0, gap: 1, ind: 2.6, d: [3, 3, 2, 2], t: '4,219 stock takes registrados. La exactitud de inventario no se puede calcular: tope 2.0, indicativo ~2.6.' },
+  { id: 'MRO4', n: 'Material–WO Traceability', w: 7, m: 2.8, v: 3.1, d: [3, 4, 3, 2], t: '9,516 despachos con cost codes; el material (89% del costo) llega a los WOs. Falta la cadena requisición → compra → recepción.' },
+  { id: 'MRO5', n: 'Repairable Item Mgmt', w: 5, m: 1.3, v: 1.3, gap: 1, d: [2, 1, 1, 1], t: 'Solo 5 WOs de tipo Repairable spare en todo el historial: control incipiente.' },
+  { id: 'KPI1', n: 'Financial KPI Accuracy', w: 6, m: 2.0, v: 2.0, gap: 1, ind: 2.1, d: [3, 2, 1, 2], t: 'Costos por departamento, clase y año disponibles, pero desde el 12-may-2026 todas las horas tienen tarifa $0 (≈ $53K sin costear). Tope 2.0; indicativo ~2.1.' }
+];
+const band = s => s < 2 ? ['Critical', 'red'] : s < 3 ? ['At Risk', 'amber'] : s < 3.6 ? ['Acceptable', 'green'] : s < 4.5 ? ['Optimal', 'brand'] : ['Best-in-Class', 'purple'];
+const scoreCol = s => s < 2 ? col('red') : s < 3 ? col('amber') : s < 3.6 ? col('green') : col('brand');
+const WSUM = DOM.reduce((a, d) => a + d.w, 0);
+const glob = key => DOM.reduce((a, d) => a + d.w * d[key], 0) / WSUM;
+DOM.forEach(d => {
+  d.ev = reg({ title: `${d.id} · ${d.n}`, value: `${d.m.toFixed(1)} → <span class="${d.v > d.m ? 'up' : ''}">${d.v.toFixed(1)}</span>`, how: d.t, head: ['Dimensión', 'Score'], rows: [['D1 Process existence (30%)', d.d[0]], ['D2 Execution consistency (30%)', d.d[1]], ['D3 Data quality (20%)', d.d[2]], ['D4 Gap vs benchmark (20%)', d.d[3]], ['Peso en el modelo', d.w + '%']], note: d.gap ? 'DATA GAP: el KPI no se puede calcular con los datos compartidos, por eso el score queda topado en 2.0 o menos' + (d.ind ? ` (indicativo ${d.ind.toFixed(1)}).` : '.') : d.med ? 'Antes estaba topado por DATA GAP; ahora es medible con el historial de WOs. Parte del alza es medición, no solo mejora.' : '', src: SRC.rep + ' · ' + SRC.wo });
+});
+(function () {
+  const g = $('#gauge'), cx = 200, cy = 190, r = 150;
+  const pt = a => [cx - r * Math.cos(a * Math.PI / 180), cy - r * Math.sin(a * Math.PI / 180)];
+  const arc = (a0, a1) => { const p0 = pt(a0), p1 = pt(a1); return `M${p0[0].toFixed(1)} ${p0[1].toFixed(1)}A${r} ${r} 0 0 1 ${p1[0].toFixed(1)} ${p1[1].toFixed(1)}`; };
+  const bands = [[1, 2, 'red'], [2, 3, 'amber'], [3, 3.6, 'green'], [3.6, 4.5, 'brand'], [4.5, 5, 'purple']], A = s => (s - 1) / 4 * 180;
+  let h = bands.map(b => `<path d="${arc(A(b[0]) + .8, A(b[1]) - .8)}" fill="none" stroke="var(--${b[2]})" stroke-width="22" stroke-linecap="butt" opacity=".9"/>`).join('');
+  [1, 2, 3, 4, 5].forEach(s => { const p = pt(A(s)), q = [cx - (r + 24) * Math.cos(A(s) * Math.PI / 180), cy - (r + 24) * Math.sin(A(s) * Math.PI / 180)]; h += `<text class="ax" x="${q[0]}" y="${q[1] + 3}" text-anchor="middle" style="font-size:11px">${s}</text>`; });
+  h += `<g id="needle" style="transform-origin:${cx}px ${cy}px;transform:rotate(-90deg);transition:transform 1.6s cubic-bezier(.3,1.4,.4,1)"><polygon points="${cx - 6},${cy} ${cx + 6},${cy} ${cx},${cy - 132}" fill="var(--text)"/></g><circle cx="${cx}" cy="${cy}" r="12" fill="var(--text)"/><circle cx="${cx}" cy="${cy}" r="5" fill="var(--surface)"/>`;
+  h += `<text id="gnum" x="${cx}" y="${cy + 52}" text-anchor="middle" style="font-family:var(--display);font-size:46px;font-weight:700;fill:var(--text)">1.81</text><text id="gband" x="${cx}" y="${cy + 76}" text-anchor="middle" style="font-size:13px;font-weight:600;fill:var(--red)">Critical</text>`;
+  g.innerHTML = h;
+  const needle = $('#needle'), num = $('#gnum'), bd = $('#gband');
+  const setScore = (s) => { needle.style.transform = `rotate(${A(s) - 90}deg)`; };
+  const doms = $('#doms');
+  doms.innerHTML = DOM.map((d, i) => `<button class="dom ev" data-ev="${d.ev}"><div class="nm">${d.id}${d.gap ? '<small>DATA GAP</small>' : d.med ? '<small style="color:var(--teal)">medido</small>' : '<small>&nbsp;</small>'}</div><div class="tr"><div class="fl" data-v="${d.v}" style="background:${scoreCol(d.v)}"></div><div class="mk" style="left:${d.m / 5 * 100}%"></div></div><div class="sc" style="color:${scoreCol(d.v)}">${d.v.toFixed(1)}</div></button>`).join('');
+  const fills = () => $$('.fl', doms);
+  const show = (k, anim) => { fills().forEach((f, i) => { f.style.width = (DOM[i][k] / 5 * 100) + '%'; f.style.background = scoreCol(DOM[i][k]); const sc = f.closest('.dom').querySelector('.sc'); sc.textContent = DOM[i][k].toFixed(1); sc.style.color = scoreCol(DOM[i][k]); }); };
+  let leveled = false;
+  const run = () => {
+    show('m'); setScore(1.81); num.textContent = '1.81'; bd.textContent = 'Critical'; bd.style.fill = col('red'); leveled = false;
+    setTimeout(() => {
+      show('v'); setScore(glob('v'));
+      const t0 = performance.now(), from = 1.81, to = glob('v');
+      const tick = t => { const p = Math.min(1, (t - t0) / 1600), e = 1 - Math.pow(1 - p, 3), s = from + (to - from) * e; num.textContent = s.toFixed(2); const b = band(s); bd.textContent = b[0]; bd.style.fill = `var(--${b[1]})`;
+        if (s >= 2 && !leveled) { leveled = true; if (current === 'madurez') { toast('<b>¡Nivel superado!</b><span>Critical → At Risk</span>'); confetti(innerWidth / 2, innerHeight * .28); } }
+        if (p < 1) requestAnimationFrame(tick); else { num.textContent = to.toFixed(2); } };
+      requestAnimationFrame(tick);
+    }, 700);
+  };
+  $('#play').addEventListener('click', run);
+  doms.addEventListener('init', () => { show('m'); setScore(1.81); setTimeout(run, 400); });
+  window.__madurezInit = () => doms.dispatchEvent(new Event('init'));
+})();
+
+/* ───────── Section 03: activities ───────── */
+(function () {
+  const A = [
+    ['Asset master: download, review y upload, asset definition', 'AM1', 'Alto', 'g', '7 registros (más de 5 h con horas) entre junio y agosto.', ['371 assets cargados en agosto (350 de golpe)', 'Desde septiembre ~70% de los WOs usan assets; 0% hasta julio', 'Completitud de atributos: no medida']],
+    ['Asset Hierarchy (cancelada)', 'AM2', 'Parcial', 't', 'Tarea cancelada el 28-may.', ['Estructura 31 / 113 / 371 funciona', '22% de movimientos de assets sin vincular', 'Sin taxonomía formal; Class vacío']],
+    ['PM Scheduling L-V, Update PM Date Schedule, Desactivar PM', 'WM2 / WM3', 'Medio', 't', 'Cinco registros, 5.5 h en PM Scheduling L-V.', ['PM en fin de semana: 18% → 3%', 'PM activos cumplidos en el día: 47% → 58% (sin Calderas)', 'Con cancelados la mejora es menor: 43% → 48%']],
+    ['WO Process review y prep (cancelada), soporte de asignación', 'WM1', 'Sin impacto', 'r', 'WO Process review con 6 h; prep cancelada.', ['Class sigue en 2–7%', 'Assigned To cayó de ~100% a ~77% en sep–oct (89% en nov)', 'Desde julio hay revisión de cierre: 216 reaperturas en jul–nov frente a 7 en ene–may']],
+    ['Training: PM and task plan, key users', 'WM2 / WM3', 'No medible', 'a', 'Sesiones del 14 y 21 de agosto.', ['Los comentarios de 6082 y 6048 pasaron de ~10 a ~60 al mes en agosto', 'En noviembre bajaron a ~20: falta refuerzo']],
+    ['Mobile scripts, mobile sync, reunión Digital Work', '—', 'Sin impacto aún', 'a', 'Junio a julio de 2026.', ['Los técnicos WORK-TECH solo acceden por móvil (8 de 10 usuarios)', 'Status después del hecho: 75–95% en ≤ 5 min', 'Solo 0.1% de las horas trae inicio y fin']],
+    ['Daily Hour report by employee', 'KPI1', 'Sin impacto', 'a', 'Reporte puntual de 0.5 h.', ['No permite calcular budget variance', 'Desde el 12-may las horas se registran con tarifa $0']]
+  ];
+  $('#acts').innerHTML = A.map((a, i) => { const id = reg({ title: a[0], value: `<span class="tag ${a[3]}">${a[2]}</span>`, how: `Dominio: ${a[1]}. ${a[4]}`, head: ['Lo que dicen los datos'], rows: a[5].map(x => [x]), note: 'La puntuación refleja el comportamiento del sistema, no el esfuerzo.', src: SRC.act + ' · ' + SRC.wo + ' · ' + SRC.h26 });
+    return `<button class="act ev" data-ev="${id}"><span class="tag ${a[3]}" style="min-width:92px;text-align:center">${a[2]}</span><span style="font-size:13.5px"><b>${a[0]}</b><br><span class="sub">${a[1]}</span></span></button>`; }).join('');
+  $('#acts').querySelectorAll('.act').forEach(b => { b.style.gridTemplateColumns = 'auto 1fr'; });
+})();
+
+/* ───────── Section 04: assets ───────── */
+(function () {
+  const M = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov'], V = [0, 0, 0, 0, 0, 0, 0, 13.8, 73.2, 67.7, 69.4], N = ['0 de 205', '0 de 908', '0 de 1,045', '0 de 908', '0 de 1,035', '0 de 834', '0 de 793', '118 de 853', '483 de 660', '291 de 430', '334 de 481'];
+  vbars($('#chAst'), { max: 100, unit: '%', f: v => fmt(v, v % 1 ? 1 : 0), data: M.map((l, i) => ({ l, v: V[i], c: i < 7 ? col('red') : col('teal'), ev: reg({ title: `WOs sobre assets · ${l} 2026`, value: V[i] + '%', how: `WOs no cancelados reportados en el mes cuyo Equipment empieza con “A-” (assets): ${N[i]}.`, note: i === 7 ? 'La carga masiva de assets terminó el 28-ago (review y upload del asset master).' : 'Los WOs de edificios y áreas (Facility Inspection) siguen en positions: tienen ~1% de uso de assets.', src: SRC.wo + ' · ' + SRC.act }) })) });
+  const P = [['Almacén Prod.', 235890], ['Drake 1', 159449], ['VEMAG Filler', 136059], ['Cuarto A', 107165], ['TOYO', 104106], ['Edif. Carmela', 44067], ['Zambelli', 40488], ['Peladora 1', 38578]];
+  hbars($('#chCost'), { max: 250000, f: v => '$' + fmt(v / 1000) + 'K', data: P.map(([l, v], i) => ({ l, v, c: i < 3 ? col('red') : i < 5 ? col('amber') : col('brand'), ev: reg({ title: `Costo acumulado · ${l}`, value: '$' + fmt(v), how: 'Costo de mantenimiento 2022–2026 de la position (material + labor) en el Top 25 de positions del reporte.', note: 'El asset con más costo acumula solo $1,327 porque los WOs se cargan a assets desde hace 3 meses.', src: SRC.rep }) })) });
+})();
+
+/* ───────── Section 05: PM vs CM ───────── */
+(function () {
+  const Y = { 2022: [52.97, 160.93], 2023: [1231.11, 1550.57], 2024: [1555.65, 2353.53], 2025: [1535.15, 1828.73], 2026: [3873.9, 1319.08] };
+  const seg = $('#yrSeg'), svg = $('#donutPM'); let cur = 2026;
+  seg.innerHTML = Object.keys(Y).map(y => `<button data-y="${y}" class="${+y === cur ? 'on' : ''}">${y === '2026' ? '2026*' : y}</button>`).join('');
+  const draw = () => {
+    const [pm, cm] = Y[cur], t = pm + cm, p = pm / t, R = 74, C = 2 * Math.PI * R;
+    svg.innerHTML = `<circle cx="100" cy="100" r="${R}" fill="none" stroke="var(--red)" stroke-width="26" opacity=".9"/><circle id="dpm" cx="100" cy="100" r="${R}" fill="none" stroke="var(--teal)" stroke-width="26" stroke-dasharray="${C * p} ${C}" transform="rotate(-90 100 100)" style="transition:stroke-dasharray .9s cubic-bezier(.2,.9,.2,1)"/><text x="100" y="98" text-anchor="middle" style="font-family:var(--display);font-size:34px;font-weight:700;fill:var(--text)">${(p * 100).toFixed(1)}%</text><text x="100" y="118" text-anchor="middle" class="cap">horas PM</text>`;
+    $('#donutNote').textContent = `${fmt(pm)} h preventivas · ${fmt(cm)} h correctivas${cur === 2026 ? ' · meta mundial 80%' : ''}`;
+  };
+  seg.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; cur = +b.dataset.y; $$('button', seg).forEach(x => x.classList.toggle('on', x === b)); draw(); });
+  draw();
+  $('#yrEv').addEventListener('click', () => { const [pm, cm] = Y[cur]; const id = reg({ title: `PM vs CM · ${cur}`, value: (pm / (pm + cm) * 100).toFixed(1) + '% PM', how: 'Horas booked en WOs preventivos frente a correctivos del año.', head: ['Tipo', 'Horas'], rows: [['PM', fmt(pm, 1)], ['CM', fmt(cm, 1)], ['Total', fmt(pm + cm, 1)]], src: SRC.rep }); openEv(id); });
+  const M = ['E', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N'], WK = [23.5, 24.5, 24.3, 14.8, 7.4, 1.1, 1.9, 2.7, 5.5, 5.9, 4.4], MT = [40, 39, 42, 40, 42, 52, 45, 55, 50, 72, 76], MS = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov'];
+  const mkE = (i, k) => reg({ title: `${k ? 'Lunes–martes' : 'Fin de semana'} · ${MS[i]} 2026`, value: (k ? MT : WK)[i] + '%', how: k ? 'Porcentaje de los PM programados (Sched. End Date) en lunes o martes.' : 'Porcentaje de los PM no cancelados programados en sábado o domingo.', note: 'El calendario lunes a viernes se actualizó el 29-may y el 1-jun (PM Scheduling L-V).', src: SRC.wo });
+  lines($('#chWk'), { labels: M, min: 0, max: 80, f: v => fmt(v) + '%', series: [{ name: 'Fin de semana', c: col('red'), values: WK, evs: WK.map((_, i) => mkE(i, 0)) }, { name: 'Lunes–martes', c: col('amber'), values: MT, evs: MT.map((_, i) => mkE(i, 1)) }] });
+})();
+
+/* ───────── Section 06: compliance ───────── */
+(function () {
+  const M = ['Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct'];
+  const D = [[624, 305, 585], [691, 303, 628], [623, 292, 563], [653, 257, 526], [626, 318, 511], [582, 329, 547], [524, 339, 499], [454, 261, 433], [236, 90, 214]];
+  const e0 = (i) => reg({ title: `PM cumplidos el día · ${M[i]}`, value: (D[i][1] / D[i][0] * 100).toFixed(1) + '%', how: `${D[i][1]} de ${D[i][0]} PM vencidos en el mes se completaron en o antes de la fecha programada.`, src: SRC.wo }), e7 = (i) => reg({ title: `PM cumplidos ≤ 7 días · ${M[i]}`, value: (D[i][2] / D[i][0] * 100).toFixed(1) + '%', how: `${D[i][2]} de ${D[i][0]} PM vencidos se completaron con 7 días o menos de atraso.`, note: 'Noviembre no se muestra por ser parcial.', src: SRC.wo });
+  lines($('#chCmp'), { labels: M, min: 0, max: 100, f: v => fmt(v) + '%', refs: [{ v: 90, c: col('green'), l: 'ref. 90%' }], series: [{ name: 'En el día', c: col('red'), values: D.map(d => +(d[1] / d[0] * 100).toFixed(1)), evs: D.map((_, i) => e0(i)) }, { name: '≤ 7 días', c: col('teal'), values: D.map(d => +(d[2] / d[0] * 100).toFixed(1)), evs: D.map((_, i) => e7(i)) }] });
+  const CM = [['Mar', 20], ['Abr', 58], ['May', 103], ['Jun', 76], ['Jul', 701], ['Ago', 207], ['Sep', 137], ['Oct', 11], ['Nov', 50]];
+  vbars($('#chCan'), { max: 800, data: CM.map(([l, v]) => ({ l, v, c: l === 'Jul' ? col('red') : col('amber'), ev: reg({ title: `PM cancelados en ${l}`, value: fmt(v), how: l === 'Jul' ? '615 se cancelaron el 15-jul: todos de CALDERAS, generados el 18-may por un usuario del cliente para jul–dic (≈5 por día). No aparecen en el log de actividades.' : 'PM cancelados según la fecha en que se canceló el WO.', note: 'Total 1,363 PM cancelados (19.9% de 6,838). Sin Calderas, la cancelación pasó de 8% a 17%.', src: SRC.wo }) })) });
+  const ex = { v: [48.7, 63.1, 89.0], d: ['2,623 de 5,387 PM vencidos', '3,400 de 5,387', '4,795 de 5,387 · ref. industria ≥ 90%'] }, inn = { v: [39.7, 49.4, 72.6], d: ['2,623 de 6,605 PM vencidos', '3,400 de 6,605', '4,795 de 6,605'] };
+  EV['c-day'] = { title: 'PM cumplidos el día programado', value: '48.7% <span class="sub">(39.7% con cancelados)</span>', how: 'PM con Sched. End Date ≤ 23-nov completados en o antes de esa fecha. Compliance = completados a tiempo ÷ PM vencidos.', head: ['Base', 'PM vencidos', 'A tiempo', '%'], rows: [['Sin cancelados', '5,387', '2,623', '48.7%'], ['Con cancelados', '6,605', '2,623', '39.7%']], note: '97% de los PM tienen ventana de 1 día (Sched. Start = End), una prueba estricta. Falta definir una gracia por frecuencia.', src: SRC.wo };
+  EV['c-1'] = { title: 'Con ≤ 1 día de atraso', value: '63.1%', how: 'PM completados con a lo sumo 1 día de atraso sobre 5,387 PM vencidos sin cancelados.', src: SRC.wo };
+  EV['c-7'] = { title: 'Con ≤ 7 días de atraso', value: '89.0%', how: 'PM completados con 7 días o menos de atraso sobre 5,387 PM vencidos sin cancelados. Con cancelados en el denominador: 72.6%.', head: ['Atraso', 'PM completados'], rows: [['Antes de la fecha', '459'], ['Mismo día', '2,164'], ['1 día', '777'], ['2–3 días', '808'], ['4–7 días', '587'], ['8–14 días', '300'], ['15–30 días', '125'], ['Más de 30 días', '95']], note: 'La referencia de industria es ≥ 90%.', src: SRC.wo };
+  $('#cmpSeg').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; $$('button', $('#cmpSeg')).forEach(x => x.classList.toggle('on', x === b)); const s = b.dataset.m === 'ex' ? ex : inn;
+    [1, 2, 3].forEach((k, i) => { const el = $('#cv' + k), from = parseFloat(el.textContent), to = s.v[i], t0 = performance.now(); const tick = t => { const p = Math.min(1, (t - t0) / 700); el.textContent = (from + (to - from) * p).toFixed(0); if (p < 1) requestAnimationFrame(tick); }; requestAnimationFrame(tick); $('#cd' + k).textContent = s.d[i]; }); });
+})();
+
+/* ───────── Section 07: execution ───────── */
+(function () {
+  const L = [['Breakdown', 12.2, 1345], ['Corrective', 13.9, 466], ['ISO22000', 97.4, 194], ['PM', 94.8, 5475], ['Facility Insp.', 98.3, 577]];
+  hbars($('#chLead'), { max: 100, unit: '%', f: v => fmt(v, 1), data: L.map(([l, v, n], i) => ({ l, v, c: v < 50 ? col('red') : col('teal'), ev: reg({ title: `Anticipación · ${l}`, value: v + '%', how: `${n} WOs no cancelados de este tipo; el % tiene Sched. Start al menos 1 día después del reporte.`, note: v < 50 ? 'Es lo esperado en trabajo reactivo: se programa el mismo día.' : '', src: SRC.wo }) })) });
+  const O = [['Breakdown', 57], ['PM', 35], ['Facility Insp.', 28], ['Corrective', 18], ['Otros', 3]];
+  vbars($('#chOver'), { max: 60, data: O.map(([l, v], i) => ({ l, v, c: i === 0 ? col('red') : i < 4 ? col('amber') : col('muted') || '#888', ev: reg({ title: `Vencidos · ${l}`, value: v + ' WOs', how: 'WOs abiertos (Scheduled, In Progress, Released, Waiting for Parts y otros) con Sched. End Date anterior al 23-nov-2026.', note: 'Mediana de atraso: 32 días; máximo: 280.', src: SRC.wo }) })) });
+})();
+
+/* ───────── Section 08: technicians ───────── */
+const TECH = {
+  mec: [
+    { id: '6103', p25: 95, p26: 98, hd: 7.9, wo: '1,997', cov: 89, cm: 854, cr: 192, st: 682, sg: ['Consistente', 'g'], usr: 'Personal · solo mobile', ll: '23-nov-2026' },
+    { id: '6048', p25: 52, p26: 63, hd: 3.1, wo: '1,817', cov: 62, cm: 191, cr: 14, st: 850, sg: ['Parcial; 62% de WOs con horas', 'a'], usr: 'Personal · solo mobile', ll: '23-nov-2026' },
+    { id: '6082', p25: 46, p26: 62, hd: 5.2, wo: '1,212', cov: 87, cm: 231, cr: 16, st: 376, sg: ['Parcial, mejorando', 't'], usr: 'Personal · solo mobile', ll: '23-nov-2026' },
+    { id: '6198', p25: 25, p26: 60, hd: 3.9, wo: '694', cov: 94, cm: 49, cr: 0, st: 235, sg: ['Mejora fuerte', 't'], usr: 'Personal · solo mobile', ll: '19-nov-2026' },
+    { id: 'BLOPEZ', p25: null, p26: 69, hd: 4.0, wo: '665', cov: 96, cm: 121, cr: 39, st: 0, sg: ['Activo desde mar-2026', 't'], usr: 'Corporativo · solo mobile', ll: '23-nov-2026' },
+    { id: '6155', p25: 21, p26: 42, hd: 1.9, wo: '444', cov: 91, cm: 5, cr: 1, st: 246, sg: ['Sin horas desde 16-jul', 'r'], usr: 'Personal · sin mobile', ll: '18-ago-2026' },
+    { id: '7011', p25: 0, p26: 0, hd: 0, wo: '0', cov: 0, cm: 0, cr: 0, st: 0, sg: ['Sin uso', 'r'], usr: 'Usuario ADMIN sin mobile', ll: '25-ago-2025' }
+  ],
+  han: [
+    { id: '6144', p25: 70, p26: 68, hd: 5.7, wo: '706', cov: 70, cm: 130, cr: 0, st: 232, sg: ['Consistente', 'g'], usr: 'Personal · solo mobile', ll: '23-nov-2026' },
+    { id: '6106', p25: 29, p26: 4, hd: 6.0, wo: '31', cov: 25, cm: 0, cr: 0, st: 12, sg: ['Sin WOs desde abr', 'r'], usr: 'Personal · solo mobile', ll: '8-sep-2026' },
+    { id: '6165', p25: null, p26: 53, hd: 4.4, wo: '133', cov: 72, cm: 86, cr: 2, st: 0, sg: ['Horas desde 24-jul', 't'], usr: 'Personal · solo mobile', ll: '23-nov-2026' }
+  ],
+  otr: [
+    { id: 'Gerentes, MRO, General', p25: null, p26: null, hd: 0, wo: '—', cov: null, cm: null, cr: null, st: 0, sg: ['No aplica', 'a'], usr: 'Mixto', ll: '—', info: '26 registros de horas en 3 años: es lo esperado.' },
+    { id: 'Contratistas', p25: null, p26: null, hd: 0, wo: '35', cov: null, cm: null, cr: null, st: 0, sg: ['Asignados a empresas', 'a'], usr: 'IDs de empresa', ll: '—', info: '35 WOs de 2026 asignados a IDs de contratistas: REI, MAAC, NEW GARDE, AES ELECTRONIC y EMPIRE GAS.' },
+    { id: 'PRODUCCION', p25: null, p26: null, hd: 0, wo: '—', cov: null, cm: null, cr: null, st: 0, sg: ['ID genérico', 'r'], usr: 'Genérico', ll: '—', info: '27 registros y 121 h bajo el ID genérico PRODUCCION en 2025: no atribuibles a una persona. No aparece en 2026.' }
+  ]
+};
+(function () {
+  let cur = 'mec', cmp = false;
+  const host = $('#tcs'), sw = $('#y25');
+  const draw = () => {
+    host.innerHTML = TECH[cur].map((t, i) => {
+      const pc = t.p26, c = pc == null ? col('muted') : pc >= 60 ? col('teal') : pc >= 30 ? col('amber') : col('red');
+      const id = reg({ title: `Técnico ${t.id}`, value: `<span class="tag ${t.sg[1]}">${t.sg[0]}</span>`, how: t.info || `Evidencia 2026 (horas del 9-ene al 23-nov, WOs de la muestra de 10,000, audit trail y comentarios).`,
+        head: ['Indicador', 'Valor'], rows: t.info ? [['Lectura', t.info]] : [['% días laborables con horas 2025', t.p25 == null ? 'n/d (aún no existía)' : t.p25 + '%'], ['% días laborables con horas 2026', t.p26 + '%'], ['Horas por día con registro 2026', t.hd ? t.hd.toFixed(1) : '—'], ['WOs asignados 2026', t.wo], ['WOs completados con horas > 1 min', t.cov == null ? '—' : t.cov + '%'], ['Comentarios escritos en 2026', t.cm == null ? '—' : t.cm], ['WOs creados con su usuario', t.cr == null ? '—' : t.cr], ['Iniciar + Terminar (ene–mar 2026)', t.st || '—'], ['Tipo de usuario', t.usr], ['Último login', t.ll]],
+        note: t.id === '6048' ? '616 de sus WOs solo traen registros de 1 minuto.' : t.id === '6155' ? 'Su usuario ya no tiene Mobile = YES y figura Out of Service: consistente con su salida. 9 WOs siguen asignados después del 16-jul.' : t.id === '6106' ? 'Último login el 8-sep, pero sin horas desde el 13-abr ni WOs desde el 20-abr.' : t.id === '7011' ? 'Su usuario es de grupo ADMIN, sin mobile y sin login desde ago-2025.' : t.id === 'BLOPEZ' ? 'Ingresó en marzo de 2026; su usuario es corporativo.' : '', src: SRC.h26 + ' · ' + SRC.h25 + ' · ' + SRC.usr });
+      if (t.info) return `<button class="tc ev reveal-in" data-ev="${id}" style="grid-template-columns:1fr"><div><div class="id">${t.id}</div><small>${t.info}</small><span class="tag ${t.sg[1]}" style="margin-top:8px">${t.sg[0]}</span></div></button>`;
+      return `<button class="tc ev" data-ev="${id}"><div class="ringc">${ring(pc, c, cmp && t.p25 != null ? t.p25 : null)}<div class="c">${pc}%</div></div><div><div class="id">${t.id}</div><small>${t.usr}</small><small>${t.hd ? t.hd.toFixed(1) + ' h/día · ' : ''}${t.wo} WOs 2026</small><span class="tag ${t.sg[1]}" style="margin-top:6px">${t.sg[0]}</span></div></button>`;
+    }).join('');
+    $$('.ringw', host).forEach(play);
+  };
+  $('#trSeg').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; cur = b.dataset.t; $$('button', $('#trSeg')).forEach(x => x.classList.toggle('on', x === b)); draw(); });
+  const tg = () => { cmp = !cmp; sw.setAttribute('aria-checked', cmp); sw.style.background = cmp ? 'var(--green)' : ''; sw.classList.toggle('onx', cmp); draw(); };
+  sw.addEventListener('click', tg); sw.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tg(); } });
+  const style = document.createElement('style'); style.textContent = '#y25.onx::after{left:21px}'; document.head.appendChild(style);
+  draw();
+})();
+
+/* ───────── Section 09: platform ───────── */
+(function () {
+  const host = $('#chPl');
+  const W5 = ['2023-24', 'Ene–Mar', 'Abr–May', 'Jul–Sep', 'Sep–Nov'];
+  const mkv = (t, v, how, note, src) => reg({ title: t, value: v, how, note: note || '', src: src || SRC.aud });
+  const views = {
+    flow: { t: 'Quién ejecuta y cuándo se actualiza el status', s: 'Audit trail · % de los cambios Iniciar y Terminar', draw: () => {
+      const T = [78.5, 80.5, 90.6, 88.8, 86.8], Q = [83.1, 90.5, 94.5, 82.5, 74.9];
+      lines(host, { labels: W5, min: 50, max: 100, ticks: 5, f: v => fmt(v) + '%', series: [{ name: 'Técnicos ejecutan', c: col('teal'), values: T, evs: T.map((v, i) => mkv(`Técnicos ejecutan · ${W5[i]}`, v + '%', 'Porcentaje de los pasos Scheduled → In Progress e In Progress → Ready to Complete hechos por usuarios de técnicos (WORK-TECH, solo mobile).', 'Los técnicos tienen acceso solo mobile; el flag ava_mobile del audit trail es siempre NO y no mide uso.')) }, { name: 'Iniciar → Terminar ≤ 5 min', c: col('amber'), values: Q, evs: Q.map((v, i) => mkv(`Iniciar → Terminar ≤ 5 min · ${W5[i]}`, v + '%', 'WOs que pasan de In Progress a Ready to Complete a los 5 minutos o menos: el status se actualiza después del hecho.', 'Baja a 74.9% en sep–nov: parte del registro ya se hace más cerca del trabajo.')) }] });
+    }, i: '<p><b>81–91%</b> de los pasos de ejecución los hacen los propios técnicos con su usuario (79% en 2023-24).</p><p class="mt">El <b>75–95%</b> de los WOs pasa de In Progress a Ready to Complete en 5 minutos o menos: el status se actualiza después del hecho, no en tiempo real.</p>', k: [['8 de 10', 'usuarios solo mobile', 'k-mob']] },
+    close: { t: 'Quién cierra a Completed', s: '% de los cierres · el cierre ya no recae en una sola persona', draw: () => {
+      const A = [98.5, 100, 100, 5.6, 26.8], B = [0, 0, 0, 54.7, 25.1], Cc = [0, 0, 0, 39.7, 48.0];
+      const e = (n, a) => a.map((v, i) => mkv(`${n} · ${W5[i]}`, v + '%', `Porcentaje de los cierres (Ready to Complete → Completed) hechos por ${n}.`, i === 0 ? 'En 2023-24 el 98.5% lo cerraba SDIAZ; desde ene-2026, NMARTINEZ.' : ''));
+      stack(host, { labels: W5, series: [{ name: 'SDIAZ / NMARTINEZ', c: col('brand'), values: A, evs: e('SDIAZ / NMARTINEZ', A) }, { name: 'APASSAPERA', c: col('teal'), values: B, evs: e('APASSAPERA', B) }, { name: 'LNIEVES', c: col('amber'), values: Cc, evs: e('LNIEVES', Cc) }] });
+    }, i: '<p>Antes cerraba <b>una sola persona</b>. Desde julio comparten el cierre tres usuarios.</p><p class="mt">Los nuevos cierres devuelven WOs a In Progress: <b>216 reaperturas</b> en jul–nov frente a 7 en ene–may. El cierre tardó más: mediana de 30 h en jul–sep y 10.5 h en sep–nov (antes 0.8 h).</p>', k: [['216', 'reaperturas jul–nov', 'k-reab']] },
+    comm: { t: 'Comentarios de técnicos y de otros usuarios', s: 'Comentarios por mes de 2026 · pico tras las capacitaciones de agosto', draw: () => {
+      const M = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov'], T = [60, 117, 111, 85, 95, 127, 166, 315, 283, 166, 142], O = [60, 45, 32, 23, 50, 65, 82, 81, 101, 49, 106];
+      const e = (n, a) => a.map((v, i) => mkv(`${n} · ${M[i]} 2026`, fmt(v), `Líneas de comentario escritas por ${n.toLowerCase()} en WOs.`, i === 7 ? 'Capacitaciones del 14 y 21 de agosto. Correlación en el tiempo; no prueba causalidad.' : ''));
+      stack(host, { labels: M, max: 450, f: v => fmt(v), series: [{ name: 'Técnicos', c: col('teal'), values: T, evs: e('Técnicos', T) }, { name: 'Otros', c: col('muted'), values: O, evs: e('Otros usuarios', O) }], pad: { l: 40, r: 8, t: 30, b: 30 } });
+    }, i: '<p>Los técnicos escriben el <b>71%</b> de los comentarios de 2026 (62% histórico), <b>1.8×</b> más que en 2025.</p><p class="mt">El <b>66%</b> de los WOs reactivos completados tiene comentario (PM: 8%). Tras las capacitaciones de agosto, el 6082 y el 6048 pasaron de ~10 a ~60 comentarios al mes; en noviembre ya bajaron a ~20.</p>', k: [['87', 'comentarios “realizado por…”', 'k-attr']] },
+    hrs: { t: 'WOs de técnicos con horas reales (> 1 min)', s: '% de los WOs que un técnico marcó Ready to Complete · por ventana de 2026', draw: () => {
+      const L = ['Ene–Mar', 'Abr–May', 'Jul–Sep', 'Sep–Nov'], V = [79.9, 87.0, 94.5, 98.4], N = ['1,212 de 1,516', '1,129 de 1,297', '1,243 de 1,315', '1,274 de 1,295'];
+      vbars(host, { max: 100, unit: '%', f: v => fmt(v, v % 1 ? 1 : 0), data: L.map((l, i) => ({ l, v: V[i], c: i === 3 ? col('green') : col('teal'), ev: mkv(`Horas reales · ${l}`, V[i] + '%', `WOs con horas > 1 minuto: ${N[i]}. Los registros simbólicos de 1 minuto inflaban la cobertura al inicio de 2026 (25% de los registros en marzo).`, 'Con cualquier registro la cobertura era 99%.', SRC.aud + ' · ' + SRC.h26) })) });
+    }, i: '<p>Con horas reales, la cobertura subió de <b>80%</b> en ene–mar a <b>98%</b> en sep–nov.</p><p class="mt">El empleado asociado al usuario que cerró el WO es quien tiene las horas en el <b>99.4–99.8%</b> de los casos.</p>', k: [['99.7%', 'usuario = empleado', 't-coh']] }
+  };
+  EV['k-mob'] = { title: 'Técnicos con acceso solo mobile', value: '8 de 10', how: 'En el listado de usuarios, 8 de los 10 usuarios del grupo WORK-TECH tienen Mobile = YES y Attune EAM = NO: solo pueden entrar por la plataforma móvil.', head: ['Usuario', 'Mobile', 'Último login'], rows: [['6103', 'Sí', '23-nov'], ['6048', 'Sí', '23-nov'], ['6082', 'Sí', '23-nov'], ['6198', 'Sí', '19-nov'], ['BLOPEZ', 'Sí', '23-nov'], ['6144', 'Sí', '23-nov'], ['6165', 'Sí', '23-nov'], ['6106', 'Sí', '8-sep'], ['6155', 'No', '18-ago'], ['Cuenta duplicada (no usar)', 'No', '2-ago-2023']], note: 'Se infiere de la configuración actual; no sabemos si era igual en 2023-24. El flag ava_mobile del audit trail (siempre NO) no refleja este uso: conviene preguntar al cliente qué marca.', src: SRC.usr };
+  EV['k-reab'] = { title: 'Reaperturas por revisión de cierre', value: '216', how: 'Cambios Ready to Complete → In Progress por ventana.', head: ['Ventana', 'Reaperturas', '% de los Ready to Complete'], rows: [['Ene–Mar 2026', '3', '0.2%'], ['Abr–May', '4', '0.3%'], ['Jul–Sep', '137', '8.7%'], ['Sep–Nov', '79', '5.1%']], note: 'Las hacen APASSAPERA y LNIEVES. Coincide con la revisión del proceso de WOs de junio y las capacitaciones, aunque no se puede probar la causa.', src: SRC.aud };
+  EV['k-attr'] = { title: 'Comentarios “realizado por…”', value: '87', how: 'Comentarios de 2026 que aclaran quién realizó el trabajo (162 en total desde 2022).', head: ['Año', 'Comentarios'], rows: [['2022', '4'], ['2023', '19'], ['2024', '17'], ['2025', '35'], ['2026', '87']], note: 'Hay trabajo registrado a nombre de otro técnico: la atribución de horas por persona tiene margen de error.', src: SRC.com };
+  let cur = 'flow';
+  const render = () => { const v = views[cur]; $('#plT').textContent = v.t; $('#plS').textContent = v.s; v.draw(); $('#plI').innerHTML = v.i; $('#plK').innerHTML = v.k.map(k => `<button class="kpi ev" style="width:auto;padding:10px 14px" data-ev="${k[2]}"><div class="v" style="font-size:26px">${k[0]}</div><div class="d">${k[1]}</div></button>`).join(''); };
+  $('#plSeg').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; cur = b.dataset.p; $$('button', $('#plSeg')).forEach(x => x.classList.toggle('on', x === b)); render(); });
+  render();
+})();
+
+/* ───────── Section 10: hours quality ───────── */
+(function () {
+  const T25 = [3.1, 1.0, 1.0, 0.9, 1.0, 2.6, 2.2, 0.8, 6.3, 6.7, 7.5, 16.7], T26 = [15.1, 19.7, 24.8, 13.9, 9.7, 6.0, 4.8, 3.0, 3.0, 3.0, 3.3];
+  const MN = ['E', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'], labs = [...MN, ...MN.slice(0, 11)], vals = [...T25, ...T26], full = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+  lines($('#chTiny'), { labels: labs, min: 0, max: 30, ticks: 5, f: v => fmt(v) + '%', skip: 1, series: [{ name: 'Registros de 1 minuto', c: col('amber'), values: vals, evs: vals.map((v, i) => reg({ title: `Registros de 1 minuto · ${full[i % 12]} ${i < 12 ? 2025 : 2026}`, value: v + '%', how: 'Porcentaje de los registros de horas del mes con 0.0167 h (1 minuto).', note: i === 14 ? 'Pico de 24.8% en marzo de 2026.' : i === 8 ? 'Empieza a subir en sep-2025.' : '', src: SRC.h25 + ' · ' + SRC.h26 })) }] });
+  const R = [0, 0, 0, 0, 65, 100, 100, 100, 100, 100, 100], MS = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov'];
+  vbars($('#chRate'), { max: 100, unit: '%', data: R.map((v, i) => ({ l: MS[i], v, c: v === 0 ? col('green') : col('red'), tip: `${MS[i]}: ${v}% de las horas con tarifa $0`, ev: reg({ title: `Tarifa $0 · ${MS[i]} 2026`, value: v + '%', how: 'Porcentaje de los registros de horas del mes con boo_rate = 0.', note: i === 4 ? 'Desde el 12-may todos los registros traen tarifa $0.' : '', src: SRC.h26 }) })) });
+})();
+
+/* ───────── Section 11: materials ───────── */
+(function () {
+  const N = [['WO generada', '29,512', 'ok', 'k-wos'], ['Requisición', 'Sin data', 'miss', 'm-req'], ['Orden de compra', 'Sin data', 'miss', 'm-po'], ['Recepción', '4,430', 'ok', 'm-rec'], ['Despacho a WO', '9,516', 'ok', 'm-iss']];
+  EV['m-req'] = { title: 'Requisiciones', value: 'Sin data', how: 'La hoja Requisitions Data Analysis del reporte dice “No Data Available”. El flujo OT → Req → PO no está activo en EAM.', note: 'Con SAP B1 como ERP, el flujo debe diseñarse antes del go-live: la integración vía Databridge Pro también está sin data.', src: SRC.rep };
+  EV['m-po'] = { title: 'Órdenes de compra', value: 'Sin data', how: 'La hoja Purchase Orders Data Analysis del reporte dice “No Data Available”; la hoja de Integration (Databridge) tampoco tiene documentos.', src: SRC.rep };
+  EV['m-rec'] = { title: 'Recepciones', value: '4,430', how: 'Goods received en los stores ALMACEN CARMELA y AL-PRO-CARMELA. Ocurren sin orden de compra en EAM.', src: SRC.rep };
+  EV['m-iss'] = { title: 'Despachos a WO', value: '9,516', how: 'Issue or return con cost codes. El material (89% del costo, $1.47M de $1.65M) llega trazado a los WOs.', note: '4,392 WOs “Direct Issue” (14.9%) se crean solo para despachar material.', src: SRC.rep };
+  $('#cyc').innerHTML = N.map((n, i) => `<button class="node ${n[2]} ev" data-ev="${n[3]}"><div class="sub">${n[0]}</div><b>${n[1]}</b></button>${i < N.length - 1 ? '<div style="align-self:center;color:var(--muted);font-size:20px" aria-hidden="true">→</div>' : ''}`).join('');
+  const I = [['Issues', 9516, 'brand'], ['Receipts', 4430, 'teal'], ['Stock takes', 4219, 'amber'], ['Corrections', 679, 'muted']];
+  vbars($('#chInv'), { max: 10000, data: I.map(([l, v, c]) => ({ l, v, c: col(c), ev: reg({ title: `Inventario · ${l}`, value: fmt(v), how: 'Transacciones acumuladas desde mayo de 2023 en los dos stores.', note: l === 'Stock takes' ? 'La exactitud de inventario no se puede calcular con estos datos (DATA GAP).' : '', src: SRC.rep }) })) });
+  const C = [['2023', 83.1], ['2024', 406.8], ['2025', 636.7], ['2026*', 519.1]];
+  vbars($('#chYear'), { max: 700, f: v => '$' + fmt(v), unit: 'K', data: C.map(([l, v], i) => ({ l, v, c: i === 3 ? col('teal') : col('brand'), ev: reg({ title: `Costo de mantenimiento ${l}`, value: '$' + fmt(v, 1) + 'K', how: 'Material + labor + servicios de todos los departamentos.', note: l === '2026*' ? 'El costo laboral de 2026 está subestimado: desde el 12-may las horas tienen tarifa $0 (≈ $53K sin costear).' : 'Material = 89% del costo acumulado ($1.47M); labor = 11% ($178K).', src: SRC.rep }) })) });
+})();
+
+/* ───────── Production line ───────── */
+const ST = [
+  { id: 'pel', n: 'Peladora 1', t: 'drum', r: 21, m: 7, i: 4.8, c: 38578, tier: 'Sin clasificar', pat: 'Sin análisis de comentarios', docs: 'n/d', extra: 'Peladora 4: 18 WOs reactivos y $23,432 de costo acumulado.' },
+  { id: 'cor', n: 'Cortadora 3', t: 'blade', r: 24, m: 9, i: 6.7, c: null, tier: 'Sin clasificar', pat: 'sensores, correas, guardas, cuchilla', cm: { sensores: 2, correas: 2, guardas: 2, eléctrico: 2, cuchilla: 2 }, docs: '15 de 24', extra: 'El system Cortadoras suma 13 reparaciones correctivas históricas.' },
+  { id: 'emu', n: 'Emulsion Mill', t: 'tank', r: 38, m: 9, i: 5.0, c: 17953, tier: 'PMO / CBM', pat: 'cajas de bolas (bearings), ruido, aceite', cm: { rodamientos: 10, sellos: 9, aceite: 7, motor: 5 }, docs: '35 de 38', extra: '9 WOs con espera de pieza: rodamiento y sello piden monitoreo de condición y repuesto crítico.' },
+  { id: 'vem', n: 'VEMAG Filler', t: 'hopper', r: 20, m: 8, i: 7.1, c: 136059, tier: 'Análisis de costo', pat: 'cadena, empaques, eléctrico', cm: { cadena: 7, empaques: 4, eléctrico: 3 }, docs: '20 de 20', extra: 'Alto costo con pocas fallas: revisar repuestos y política de overhaul. VEMAG Filler 2: $35,998. Hanging Machine: 28 WOs reactivos.' },
+  { id: 'toy', n: 'TOYO', t: 'pouch', r: 99, m: 11, i: 1.0, c: 104106, tier: 'RCM Fase 1', pat: 'caldo / pouches, temperatura, magazine', cm: { temperatura: 6, 'aire / neumático': 5, sensores: 3, rodamientos: 3, válvulas: 3 }, docs: '47 de 99', extra: '270 correctivos históricos en la position. Varios modos de falla; documentar la causa.' },
+  { id: 'dra', n: 'Drake 1', t: 'canner', r: 47, m: 11, i: 4.0, c: 159449, tier: 'RCM Fase 1', pat: 'sensores, fuera de tiempo, garra', cm: { sensores: 5, eléctrico: 5, correas: 2 }, docs: '32 de 47', extra: '166 correctivos históricos. Drake 2: 25 WOs reactivos y $25,822.' },
+  { id: 'tap', n: 'Tapadora', t: 'capper', r: 41, m: 11, i: 5.7, c: 21732, tier: 'RCM Fase 2', pat: 'liqueo de aceite, pistón, aire / vapor', cm: { eléctrico: 6, válvulas: 4, mangas: 4, vapor: 4 }, docs: '31 de 41', extra: '' },
+  { id: 'aut', n: 'Autoclaves', t: 'retort', r: 43, m: 7, i: 0.9, c: 24080, tier: 'RCM Fase 1', pat: 'recorder (reloj de presión), liqueo, válvulas, vapor', cm: { temperatura: 3, válvulas: 2 }, docs: '20 de 43', extra: '210 correctivos históricos (175 en marzo). Proceso de esterilización: validar la criticidad de inocuidad con Calidad. Autoclave Pouch 361: 24 WOs reactivos.' },
+  { id: 'kro', n: 'Krones etiq.', t: 'label', r: 22, m: 7, i: 3.1, c: null, tier: 'Sin clasificar', pat: 'Sin análisis de comentarios', docs: 'n/d', extra: '' },
+  { id: 'con', n: 'Conv. cestos', t: 'conv', r: 31, m: 8, i: 4.8, c: null, tier: 'PMO rápido', pat: 'cadena rota (17 de 31 descripciones)', cm: { cadena: 14, motor: 3, rodamientos: 2 }, docs: '20 de 31', extra: '' },
+  { id: 'cam', n: 'Cama', t: 'former', r: 44, m: 11, i: 3.9, c: 36195, tier: 'RCM Fase 2', pat: 'pega (adhesivo), conveyor, cambio de formato', cm: { adhesivo: 5, mangas: 4, pistón: 3, correas: 3 }, docs: '30 de 44', extra: '' },
+  { id: 'top', n: 'Toptier', t: 'packer', r: 40, m: 11, i: 5.4, c: null, tier: 'PMO rápido', pat: 'cadena rota, cables, flapper', cm: { alineación: 7, cadena: 6, eléctrico: 5, sensores: 4 }, docs: '30 de 40', extra: '' },
+  { id: 'zam', n: 'Zambelli', t: 'box', r: 41, m: 9, i: 3.6, c: 40488, tier: 'RCM Fase 2', pat: 'shuffler / pistón, sensores, elevador', cm: { cadena: 5, motor: 3, tornillos: 3, alineación: 3 }, docs: '26 de 41', extra: '' }
+];
+ST.forEach(s => {
+  const cmHtml = s.cm ? `<h4>Componentes más citados en los comentarios</h4><div class="mini">${Object.entries(s.cm).map(([k, v]) => `<div class="mb"><span>${k}</span><i style="width:${v * 12}px;max-width:100%"></i><b>${v}</b></div>`).join('')}</div>` : '';
+  s.ev = reg({ title: s.n, value: `${s.r} <span class="sub">WOs reactivos 2026</span>`, how: s.pat === 'Sin análisis de comentarios' ? 'Equipo sin análisis de comentarios; los datos vienen del historial de WOs.' : `Patrón en las descripciones y comentarios: ${s.pat}.`, head: ['Indicador', 'Valor'], rows: [['WOs reactivos (Breakdown, Corrective, Emergency)', s.r], ['Meses con eventos (de 11)', s.m], ['Intervalo mediano entre WOs', s.i.toFixed(1) + ' días'], ['Costo acumulado de la position', s.c ? '$' + fmt(s.c) : 'n/d (fuera del Top 25)'], ['WOs con comentario', s.docs], ['Clasificación propuesta', s.tier]], extra: cmHtml, note: s.extra, src: SRC.wo + ' · ' + SRC.com + ' · ' + SRC.rep });
+});
+const heatCol = t => { const h = 135 - 135 * Math.max(0, Math.min(1, t)); return `hsl(${h} 78% ${isDark() ? 56 : 46}%)`; };
+function stationArt(s) {
+  switch (s.t) {
+    case 'drum': return `<rect class="body" x="-38" y="150" width="76" height="76" rx="10"/><g class="spin"><circle class="part" cx="0" cy="186" r="26"/><path class="stk" d="M-26 186h52M0 160v52M-18 168l36 36M18 168l-36 36"/></g><rect class="body" x="-14" y="134" width="28" height="16" rx="4"/>`;
+    case 'blade': return `<rect class="body" x="-40" y="140" width="80" height="86" rx="10"/><rect class="metal chop" x="-28" y="150" width="56" height="8" rx="3"/><rect class="pch" x="-22" y="206" width="44" height="14" rx="4" opacity=".7"/>`;
+    case 'tank': return `<path class="body" d="M-34 144h68v56q0 26-34 26t-34-26z"/><g class="spin"><path class="stk" d="M-22 190h44M0 168v44"/></g><rect class="metal" x="-4" y="132" width="8" height="30"/>`;
+    case 'hopper': return `<path class="body" d="M-40 130h80l-24 44h-32z"/><rect class="body" x="-22" y="174" width="44" height="52" rx="6"/><rect class="metal pump" x="-7" y="196" width="14" height="30" rx="3"/>`;
+    case 'pouch': return `<rect class="body" x="-42" y="146" width="84" height="80" rx="12"/><rect class="metal" x="-26" y="134" width="52" height="14" rx="4"/><path class="pch bob" d="M-12 190h24l-3 28h-18z"/><circle class="part" cx="26" cy="166" r="8"/>`;
+    case 'canner': return `<ellipse class="body" cx="0" cy="214" rx="42" ry="10"/><rect class="body" x="-30" y="150" width="60" height="60" rx="8"/><rect class="can" x="-12" y="186" width="24" height="26" rx="3"/><ellipse class="canl press" cx="0" cy="168" rx="13" ry="4"/>`;
+    case 'capper': return `<rect class="body" x="-34" y="146" width="68" height="80" rx="10"/><rect class="metal press" x="-8" y="150" width="16" height="30" rx="3"/><circle class="can" cx="0" cy="210" r="9"/>`;
+    case 'retort': return `<rect class="body" x="-52" y="172" width="104" height="54" rx="27"/><circle class="part" cx="34" cy="199" r="15"/><circle class="part" cx="0" cy="152" r="14"/><line class="stk swing" x1="0" y1="152" x2="0" y2="140"/><circle class="puff" cx="-24" cy="168" r="7"/><circle class="puff s2" cx="-4" cy="164" r="7"/><circle class="puff s3" cx="16" cy="168" r="7"/>`;
+    case 'label': return `<rect class="body" x="-36" y="150" width="72" height="76" rx="10"/><rect class="pch slide" x="-14" y="188" width="28" height="12" rx="2"/><circle class="part" cx="-22" cy="166" r="8"/>`;
+    case 'conv': return `<rect class="body" x="-44" y="196" width="88" height="30" rx="14"/><g class="spin"><circle class="part" cx="-28" cy="211" r="9"/><path class="stk" d="M-37 211h18M-28 202v18"/></g><g class="spin2"><circle class="part" cx="28" cy="211" r="9"/><path class="stk" d="M19 211h18M28 202v18"/></g><path class="stk" d="M-28 190h56" stroke-dasharray="6 6"/>`;
+    case 'former': return `<rect class="body" x="-40" y="148" width="80" height="78" rx="10"/><rect class="metal pump" x="-26" y="190" width="12" height="30" rx="3"/><rect class="metal pump" x="14" y="190" width="12" height="30" rx="3" style="animation-delay:.7s"/><rect class="pch" x="-14" y="204" width="28" height="14" rx="3" opacity=".7"/>`;
+    case 'packer': return `<rect class="body" x="-40" y="140" width="80" height="86" rx="10"/><path class="stk bob" d="M-12 160l12 14 12-14"/><rect class="part" x="-24" y="196" width="48" height="24" rx="4"/>`;
+    default: return `<rect class="body" x="-36" y="170" width="72" height="56" rx="6"/><path class="part flap" d="M-36 170l36-22 36 22z"/><rect class="pch" x="-10" y="196" width="20" height="16" rx="3" opacity=".7"/>`;
+  }
+}
+const lineState = {};
+function buildLine(host, o) {
+  const hero = o.mode === 'hero', n = ST.length, X0 = 90, DX = 114, W = X0 + DX * (n - 1) + 90, H = 330, beltY = 228;
+  let g = `<rect class="belt" x="10" y="${beltY}" width="${W - 20}" height="16" rx="8"/><line class="beltd" x1="20" x2="${W - 20}" y1="${beltY + 8}" y2="${beltY + 8}"/>`;
+  g += `<g id="${host.id}-st">`;
+  ST.forEach((s, i) => { const x = X0 + DX * i;
+    g += `<g class="st" ${hero ? '' : `data-ev="${s.ev}" tabindex="0" role="button" aria-label="${s.n}: ${s.r} WOs reactivos. Ver evidencia"`} data-id="${s.id}" transform="translate(${x},0)">`;
+    if (!hero) g += `<circle class="halo" cx="0" cy="188" r="58" fill="none" stroke-width="6" data-halo="${s.id}"/>`;
+    g += stationArt(s);
+    if (!hero) g += `<g class="badge" transform="translate(0,112)"><circle r="17" data-badge="${s.id}"/><text y="4" data-btxt="${s.id}">${s.r}</text></g><text class="stl" y="${beltY + 42}">${s.n}</text><text class="stm" y="${beltY + 58}" data-met="${s.id}"></text>`;
+    g += `</g>`; });
+  g += `</g><g id="${host.id}-items"></g>`;
+  host.innerHTML = `<svg viewBox="0 ${hero ? 0 : 84} ${W} ${hero ? 270 : 252}" ${hero ? 'style="margin-top:-60px"' : ''} role="img" aria-label="Línea de producción animada"><defs></defs>${g}</svg>`;
+  const items = $(`#${host.id}-items`), objs = [], total = 16, span = W + 80;
+  for (let k = 0; k < total; k++) { const isCan = k % 3 !== 2, e = document.createElementNS('http://www.w3.org/2000/svg', 'g'); e.innerHTML = isCan ? '<rect class="can" x="-9" y="-24" width="18" height="24" rx="3"/><ellipse class="canl" cy="-24" rx="9" ry="3"/>' : '<path class="pch" d="M-10 0v-20q0-4 4-4h12q4 0 4 4v20z"/><rect x="-6" y="-17" width="12" height="3" rx="1.5" fill="#fff" opacity=".6"/>'; items.appendChild(e); objs.push({ e, x: span / total * k - 40 }); }
+  let last = 0, vis = true; new IntersectionObserver(en => { vis = en[0].isIntersecting; }, { threshold: .05 }).observe(host);
+  const loop = t => { if (vis && !reduce) { const dt = Math.min(50, t - last) / 1000; objs.forEach(o => { o.x += 46 * dt; if (o.x > W + 20) o.x = -30; o.e.setAttribute('transform', `translate(${o.x.toFixed(1)},${beltY})`); }); } last = t; requestAnimationFrame(loop); };
+  objs.forEach(o => o.e.setAttribute('transform', `translate(${o.x},${beltY})`));
+  requestAnimationFrame(loop);
+  if (!hero) { lineState.host = host; setHeat('r'); }
+  play(host);
+}
+const HEAT = {
+  r: { v: s => s.r, max: 60, lab: s => String(s.r), met: s => `${s.m} meses`, note: 'Color = WOs reactivos de 2026 (rojo = más).', inv: false },
+  c: { v: s => s.c, max: 160000, lab: s => s.c ? '$' + Math.round(s.c / 1000) + 'K' : 'n/d', met: s => s.c ? '' : 'fuera del Top 25', note: 'Color = costo acumulado 2022–2026 de la position (gris = fuera del Top 25).' },
+  i: { v: s => s.i, max: 8, lab: s => s.i.toFixed(1) + 'd', met: s => `${s.r} WOs reactivos`, note: 'Color = intervalo mediano entre WOs reactivos (rojo = fallas más seguidas).', inv: true }
+};
+function setHeat(k) {
+  const H = HEAT[k]; $('#heatNote').textContent = H.note;
+  ST.forEach(s => { const v = H.v(s), has = v != null, t = has ? (H.inv ? 1 - v / H.max : v / H.max) : 0, c = has ? heatCol(t) : css('--muted'); const b = $(`[data-badge="${s.id}"]`), tx = $(`[data-btxt="${s.id}"]`), h = $(`[data-halo="${s.id}"]`), m = $(`[data-met="${s.id}"]`);
+    if (b) { b.setAttribute('fill', c); tx.textContent = H.lab(s); tx.setAttribute('style', 'font-size:' + (H.lab(s).length > 3 ? 9.5 : 12) + 'px'); h.setAttribute('stroke', c); h.setAttribute('opacity', has ? (.2 + .5 * t) : .08); m.textContent = H.met(s); } });
+}
+$('#heatSeg').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; $$('button', $('#heatSeg')).forEach(x => x.classList.toggle('on', x === b)); setHeat(b.dataset.h); });
+
+/* ───────── Section 14: RCM ───────── */
+(function () {
+  const C = [5, 8, 10, 13, 15, 18, 20, 22, 24, 26, 27, 29, 31, 32, 34, 35, 37, 38, 39, 41, 42, 43, 44, 45, 47];
+  EV['p-pt'] = { title: 'Acumulado de WOs reactivos', value: '—', how: '', src: SRC.wo };
+  lines($('#chPar'), { labels: C.map((_, i) => i + 1), skip: 4, min: 0, max: 50, ticks: 5, f: v => v + '%', series: [{ name: '% acumulado de WOs reactivos', c: col('brand'), values: C, evs: C.map((v, i) => reg({ title: `Los ${i + 1} primeros equipos`, value: v + '%', how: `Los ${i + 1} equipos con más WOs reactivos acumulan ${v}% de los 1,816 WOs reactivos.`, note: i === 9 ? 'Con 10 equipos se llega a 26%; con 20, a 41%; hacen falta 86 de 244 equipos para el 80%.' : '', src: SRC.wo })) }] });
+  const T = [
+    ['RCM Fase 1', 'red', ['toy', 'dra', 'aut'], 'Mayor frecuencia, mayor costo o instrumentación de seguridad.'],
+    ['RCM Fase 2', 'amber', ['zam', 'cam', 'tap', 'nev'], 'Fallas recurrentes con costo moderado.'],
+    ['Análisis de costo', 'brand', ['vem'], 'Mucho costo con pocas fallas.'],
+    ['PMO rápido', 'teal', ['top', 'con', 'var', 'emu'], 'Una falla dominante: rediseñar PM o inspección sin RCM completo.']
+  ];
+  const extra = { nev: { n: 'Nevera 2', ev: reg({ title: 'Nevera 2 (Cuarto B)', value: '44 <span class="sub">WOs reactivos 2026</span>', how: 'Cuarto frío con cierre lento: mediana de 116 h entre apertura y cierre del WO.', head: ['Indicador', 'Valor'], rows: [['WOs reactivos', 44], ['Meses con eventos', 11], ['Intervalo mediano', '3.4 días'], ['WOs con comentario', '33 de 44'], ['Componentes citados', 'puerta (7), aire / neumático (4)']], note: 'Hay menciones de moho en cortina de aire y techo: señal de higiene para la criticidad. Costo n/d (fuera del Top 25).', src: SRC.wo + ' · ' + SRC.com }) }, var: { n: 'Carro de varas', ev: reg({ title: 'Carro de varas', value: '31 <span class="sub">WOs reactivos 2026</span>', how: 'Falla dominante: gomas o ruedas trancadas y dañadas (21 de 31 descripciones).', head: ['Indicador', 'Valor'], rows: [['WOs reactivos', 31], ['Meses con eventos', 10], ['Intervalo mediano', '5.0 días'], ['WOs con comentario', '15 de 31'], ['Componentes citados', 'gomas y ruedas (11), aceite (3)']], src: SRC.wo + ' · ' + SRC.com }) } };
+  $('#tiers').innerHTML = T.map(t => `<div class="tier"><h3><span class="dotc" style="background:var(--${t[1]})"></span>${t[0]}</h3><p class="sub">${t[3]}</p><div class="chips mt">${t[2].map(id => { const s = ST.find(x => x.id === id), e = s ? { n: s.n, ev: s.ev } : extra[id]; return `<button class="pill ev" data-ev="${e.ev}">${e.n}</button>`; }).join('')}</div></div>`).join('');
+  const G = [['Class vacío en 92.7% de los WOs', 'Class es el campo para clasificar el WO; casi nunca se usa.'], ['Sin problem / cause codes', 'Los comentarios los suplen en parte: 65% de los WOs reactivos tiene comentario.'], ['Sin downtime', 'MTBF y MTTR no se pueden calcular; el ciclo del WO no es downtime.'], ['Sin criticidad por equipo', 'Falta el impacto en producción, inocuidad y seguridad: taller de Equipment Ranking.'], ['TOYO y Autoclaves: 47% con comentario', 'Los dos candidatos de Fase 1 con más fallas están peor documentados.']];
+  $('#gaps').innerHTML = G.map(g => `<button class="pill ev" data-ev="${reg({ title: g[0], value: '', how: g[1], src: SRC.wo + ' · ' + SRC.com })}">⚠ ${g[0]}</button>`).join('');
+})();
+
+/* ───────── Section 15: roadmap ───────── */
+(function () {
+  const LV = [
+    ['RM1 · Equipment Ranking y riesgo', 1.0, 2.5, .144], ['MRO1 · Clasificación ABC', 1.0, 2.5, .112], ['MRO2 · EOQ y reorden', 1.0, 2.5, .112], ['AM1 · Completitud del asset master', 2.0, 2.9, .096], ['WM3 · Planning y scheduling', 2.5, 3.3, .068], ['MRO5 · Repairables', 1.3, 2.5, .064]
+  ];
+  const on = new Set(), base = glob('v'), lv = $('#levers');
+  lv.innerHTML = LV.map((l, i) => `<button class="lever" data-i="${i}" aria-pressed="false"><span class="sw"></span><span style="font-size:13.5px"><b>${l[0]}</b><br><span class="sub">${l[1].toFixed(1)} → ${l[2].toFixed(1)}</span></span><b class="up">+${l[3].toFixed(2)}</b></button>`).join('');
+  const mt = $('#meter'), MIN = 1.8, MAX = 3.2, P = v => ((v - MIN) / (MAX - MIN) * 100) + '%';
+  mt.insertAdjacentHTML('beforeend', [[2.0, 'At Risk', ''], [2.8, 'Meta 2.8', ''], [3.0, 'Acceptable', 'b']].map(m => `<div class="m ${m[2]}" style="left:${P(m[0])}"><span>${m[1]}</span></div>`).join(''));
+  const upd = () => { const g = [...on].reduce((a, i) => a + LV[i][3], 0), s = base + g; $('#proj').textContent = s.toFixed(2); $('#gain').textContent = (g ? '+' : '') + g.toFixed(2) + ' vs hoy'; $('#mf').style.width = P(s); const b = band(s); const t = $('#band'); t.textContent = b[0]; t.className = 'tag ' + ({ red: 'r', amber: 'a', green: 'g' }[b[1]] || 't'); };
+  lv.addEventListener('click', e => { const b = e.target.closest('.lever'); if (!b) return; const i = +b.dataset.i; on.has(i) ? on.delete(i) : on.add(i); b.classList.toggle('on', on.has(i)); b.setAttribute('aria-pressed', on.has(i)); upd(); if (on.size === LV.length) { toast('<b>¡Todas las palancas!</b><span>≈ 2.8 · sigue siendo At Risk</span>'); confetti(innerWidth / 2, innerHeight * .4); } });
+  upd(); setTimeout(() => { $('#mf').style.width = P(base); }, 300);
+  const HZ = [
+    ['Corto plazo · dic 2026 – feb 2027', 'red', ['Corregir la tarifa de las horas (rate = 0 desde may-26) antes de integrar con SAP B1', 'Medir la completitud del asset master y corregir Assigned To', 'Digital Work App: del registro posterior al tiempo real y sumar barcoding', 'Capturar problem / cause codes y downtime en Breakdown; usar Class']],
+    ['Mediano plazo · mar – may 2027', 'amber', ['Taller de Equipment Ranking y RCM Fase 1: TOYO, Drake 1, Autoclaves', 'PMO rápido: cadenas, gomas y cajas de bolas', 'Scheduling Board con carga por técnico, ventana de gracia, cancelaciones PM y 141 WOs vencidos', 'Requisitions → PO y ABC / EOQ (preparar SAP B1)']],
+    ['Largo plazo · jun – nov 2027', 'teal', ['RCM Fase 2: Zambelli, Cama, Tapadora, Nevera 2', 'Asset Performance Management (KPIs / OEE; MTBF y MTTR con downtime)', 'Failure Analysis con códigos de problema y causa', 'Reporting (Cognos / BI): PM compliance, schedule adherence, inventory accuracy, budget variance']]
+  ];
+  $('#hz').innerHTML = HZ.map(h => `<div class="mt"><div style="font-weight:700;font-size:13px;display:flex;gap:8px;align-items:center"><span class="dotc" style="background:var(--${h[1]})"></span>${h[0]}</div>${h[2].map(a => `<button class="act"><span class="ck">✓</span><span style="font-size:13.5px">${a}</span></button>`).join('')}</div>`).join('');
+  let done = 0; $('#hz').addEventListener('click', e => { const b = e.target.closest('.act'); if (!b) return; b.classList.toggle('done'); done = $$('.act.done', $('#hz')).length; $('#prog').textContent = done; if (b.classList.contains('done')) { const r = b.getBoundingClientRect(); confetti(r.left + 20, r.top + 10, 14); } if (done === 12) { toast('<b>¡Plan completo!</b><span>12 de 12 acciones</span>'); confetti(innerWidth / 2, innerHeight * .4); } });
+  EV['k-ruta'].how = 'Suma de la ganancia potencial de 6 palancas si cada una alcanza su score objetivo: ' + LV.map(l => `${l[0].split(' · ')[0]} +${l[3].toFixed(2)}`).join(', ') + '.';
+  EV['k-ruta'].head = ['Palanca', 'De', 'A', 'Ganancia']; EV['k-ruta'].rows = LV.map(l => [l[0], l[1].toFixed(1), l[2].toFixed(1), '+' + l[3].toFixed(3)]).concat([['<b>Total</b>', '', '', '<b>+0.596</b>']]);
+  EV['k-ruta'].note = 'Ganancia = (score objetivo − score actual) × peso ÷ 94. Con las 6 palancas el global llega a ~2.76: todavía At Risk (2.0–2.9).';
+})();
+
+/* ───────── Confetti ───────── */
+const cf = $('#cf'), cx = cf.getContext('2d'); let parts = [], raf = 0;
+function sizeCf() { cf.width = innerWidth * devicePixelRatio; cf.height = innerHeight * devicePixelRatio; cx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0); }
+addEventListener('resize', sizeCf); sizeCf();
+function confetti(x, y, n = 70) {
+  if (reduce) return; const cols = ['#2563eb', '#0d9488', '#d97706', '#16a34a', '#7c3aed', '#dc2626'];
+  for (let i = 0; i < n; i++) parts.push({ x, y, vx: (Math.random() - .5) * 9, vy: -Math.random() * 9 - 2, g: .28, s: 4 + Math.random() * 5, c: cols[i % cols.length], r: Math.random() * 6, vr: (Math.random() - .5) * .4, l: 90 + Math.random() * 40 });
+  if (!raf) raf = requestAnimationFrame(stepCf);
+}
+function stepCf() {
+  cx.clearRect(0, 0, innerWidth, innerHeight);
+  parts = parts.filter(p => p.l-- > 0); parts.forEach(p => { p.vy += p.g; p.x += p.vx; p.y += p.vy; p.r += p.vr; cx.save(); cx.translate(p.x, p.y); cx.rotate(p.r); cx.fillStyle = p.c; cx.globalAlpha = Math.min(1, p.l / 30); cx.fillRect(-p.s / 2, -p.s / 4, p.s, p.s / 2); cx.restore(); });
+  raf = parts.length ? requestAnimationFrame(stepCf) : 0;
+}
+$('#party').addEventListener('click', e => { const r = e.currentTarget.getBoundingClientRect(); confetti(r.left + r.width / 2, r.top, 140); });
+
+/* ───────── Count-up, reveal, nav ───────── */
+function countUp(el) {
+  const to = +el.dataset.count, d = +(el.dataset.dec || 0), suf = el.dataset.suf || '';
+  if (reduce) { el.textContent = fmt(to, d) + suf; return; }
+  const t0 = performance.now(), dur = 1300, tick = t => { const p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3); el.textContent = fmt(to * e, d) + suf; if (p < 1) requestAnimationFrame(tick); }; requestAnimationFrame(tick);
+}
+const scenes = $$('.scene'), dots = $('#dots');
+dots.innerHTML = scenes.map(s => `<a href="#${s.id}" data-t="${s.dataset.t}" aria-label="${s.dataset.t}"></a>`).join('');
+const dotEls = $$('a', dots);
+let current = '', firstMadurez = false;
+const io = new IntersectionObserver(es => {
+  es.forEach(e => {
+    if (e.isIntersecting) {
+      const s = e.target;
+      if (!s.classList.contains('in')) { s.classList.add('in'); $$('[data-count]', s).forEach(countUp); $$('[data-run]', s).forEach(play); if (s.id === 'madurez' && !firstMadurez) { firstMadurez = true; window.__madurezInit(); } }
+      if (e.intersectionRatio > .5 || true) { const id = s.id; if (id !== current && e.intersectionRatio >= .45) { current = id; dotEls.forEach((d, i) => d.classList.toggle('on', scenes[i] === s)); try { history.replaceState(null, '', '#' + id); } catch (_) { } } }
+    }
+  });
+}, { threshold: [.12, .45, .6] });
+scenes.forEach(s => io.observe(s));
+const go = id => { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); };
+document.addEventListener('click', e => {
+  const evb = e.target.closest('[data-ev]'); if (evb) { openEv(evb.dataset.ev); return; }
+  const g = e.target.closest('[data-go]'); if (g) { go(g.dataset.go); }
+});
+document.addEventListener('keydown', e => {
+  const t = e.target; if (t && t.matches && t.matches('[data-ev]:not(button)') && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openEv(t.dataset.ev); return; }
+  if (e.key === 'Escape') { closeEv(); return; }
+  if ($('#drawer').classList.contains('open')) return;
+  const i = scenes.findIndex(s => s.id === current);
+  if (['ArrowDown', 'PageDown', 'ArrowRight'].includes(e.key) && !(t && /INPUT|SELECT|TEXTAREA/.test(t.tagName))) { if (e.key === 'ArrowDown' || e.key === 'PageDown') { /* native scroll */ } else { e.preventDefault(); go(scenes[Math.min(scenes.length - 1, i + 1)].id); } }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(scenes[Math.max(0, i - 1)].id); }
+});
+$('#dx').addEventListener('click', closeEv); $('#scrim').addEventListener('click', closeEv);
+$('#help').addEventListener('click', () => { const id = reg({ title: 'Cómo usar esta presentación', value: '', how: 'Desplázate o usa las flechas ← → para cambiar de escena. Toca cualquier número, barra, punto o equipo con evidencia para abrir su detalle: cómo se calculó, los datos y la fuente. Esc cierra el panel.', note: 'Los equipos de la línea de producción están en un orden esquemático, no es el layout real de la planta.', src: 'VisualK' }); EV[id].help = 1; openEv(id); seen.delete(id); $('#xpn').textContent = seen.size; });
+const setTheme = t => { root.dataset.theme = t; try { localStorage.setItem('cf-theme', t); } catch (_) { } setHeat(($('#heatSeg .on') || { dataset: { h: 'r' } }).dataset.h); };
+try { const s = localStorage.getItem('cf-theme'); if (s) root.dataset.theme = s; } catch (_) { }
+$('#theme').addEventListener('click', () => setTheme(isDark() ? 'light' : 'dark'));
+const bar = $('#bar'); addEventListener('scroll', () => { const h = document.documentElement.scrollHeight - innerHeight; bar.style.width = (h > 0 ? scrollY / h * 100 : 0) + '%'; }, { passive: true });
+const tip = $('#tip');
+document.addEventListener('mouseover', e => { const t = e.target.closest('[data-tip]'); if (t) { tip.textContent = t.dataset.tip; tip.classList.add('on'); } });
+document.addEventListener('mousemove', e => { if (tip.classList.contains('on')) { tip.style.left = Math.min(innerWidth - 270, e.clientX + 14) + 'px'; tip.style.top = (e.clientY + 16) + 'px'; } });
+document.addEventListener('mouseout', e => { if (e.target.closest && e.target.closest('[data-tip]')) tip.classList.remove('on'); });
+window.addEventListener('hashchange', () => { const id = location.hash.slice(1); if (id && id !== current && document.getElementById(id)) go(id); });
+
+buildLine($('#heroLine'), { mode: 'hero' });
+buildLine($('#mainLine'), { mode: 'main' });
+$('#xpt').textContent = Object.keys(EV).length;
+if (location.hash.length > 1) { const el = document.getElementById(location.hash.slice(1)); if (el) setTimeout(() => el.scrollIntoView({ behavior: 'auto', block: 'start' }), 60); }
+})();
+</script>
+</body>
+</html>
